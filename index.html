@@ -3,84 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TÍTULO DO TEMPLATE (Crucial para SEO e Envato) -->
     <title>AI-CORE | Minimalist SaaS Landing Page</title>
     
+    <!-- Importação de Fontes Premium (Poppins para Títulos, Roboto para Corpo) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Importação de Ícones (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Link para o CSS principal (assets/style.css) -->
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
+    <!-- ========================================================================= -->
+    <!-- HEADER: Navbar (Usa 'hidden-element' para o Progressive Loading) -->
+    <!-- ========================================================================= -->
     <header class="header hidden-element">
         <div class="container">
             <h1 class="logo">AI-CORE</h1>
             <nav class="nav">
                 <a href="#features" aria-label="Our Features">Features</a>
                 <a href="#pricing" aria-label="Our Pricing Plans">Pricing</a>
-                <a href="#contact" class="btn-cta">Start Free Trial</a>
+                <a href="#" class="btn-cta">Start Free Trial</a>
+                <a href="#" class="user-icon" aria-label="User Account"><i class="fa-regular fa-user"></i></a>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- ========================================================================= -->
+        <!-- HERO SECTION: O bloco central de "Vidro Fosco" - Alta Conversão -->
+        <!-- O efeito de Glass Card é definido no CSS: .hero .container -->
+        <!-- ========================================================================= -->
         <section id="hero" class="hero">
             <div class="container">
+                <!-- CRÍTICO: O elemento que contém o LED Rotacional (para a animação CSS) -->
+                <div class="rotating-border-pole"></div> 
+
                 <div class="hero-content">
-                    <h2>Transform Data Overload into **Actionable Intelligence**.</h2>
+                    <!-- H2: Target do JavaScript para o efeito Typing Effect (Máquina de Escrever) -->
+                    <h2><span id="typing-text" class="typing-effect"></span></h2>
                     
-                    <p>Leverage our predictive AI to eliminate manual errors and boost your team's decision-making speed by 40%.</p>
+                    <!-- Subtítulo: Fica estático para dar contexto imediato -->
+                    <p>Dive into the art assets, where innovative blockchain technology meets financial expertise.</p>
                     
+                    <!-- Formulário de Conversão (Call-to-Action Principal) -->
                     <form class="subscribe-form">
                         <input type="email" placeholder="Enter your corporate email" aria-label="Corporate Email Input" required>
                         <button type="submit" class="btn-primary">Get Instant Access</button>
                     </form>
-
-                    <p class="small-text hidden-element">Join 10,000+ companies who trust AI-CORE.</p>
-                </div>
-                
-                <div class="hero-visual hidden-element">
-                    <img src="assets/images/ai-placeholder.svg" alt="Abstract AI Data Visualization">
                 </div>
             </div>
         </section>
 
+        <!-- ========================================================================= -->
+        <!-- FEATURES: Grid de recursos (Justifica o preço) -->
+        <!-- Usa CSS Grid para layout responsivo. A classe 'hidden-element' ativa a animação. -->
+        <!-- ========================================================================= -->
         <section id="features" class="features-grid hidden-element">
             <div class="container">
                 <h3>Why Our AI Outperforms the Competition</h3>
-                <div class="feature-card">
-                    <p class="icon">⚡</p>
-                    <h4>Real-Time Analysis</h4>
-                    <p>Process billions of data points per second with zero latency.</p>
+                <div class="features-container">
+                    <!-- Cards de Recursos (Usam Flexbox/Grid e Efeito Hover) -->
+                    <div class="feature-card">
+                        <p class="icon">⚡</p>
+                        <h4>Real-Time Analysis</h4>
+                        <p>Process billions of data points per second with zero latency.</p>
+                    </div>
+                    <div class="feature-card">
+                        <p class="icon">🔒</p>
+                        <h4>Military-Grade Security</h4>
+                        <p>Your data is protected by end-to-end encryption and blockchain.</p>
+                    </div>
+                    <div class="feature-card">
+                        <p class="icon">⚙️</p>
+                        <h4>Seamless Integration</h4>
+                        <p>Connect to any existing CRM or data warehouse in under 5 minutes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <p class="icon">🧠</p>
+                        <h4>Predictive Modeling</h4>
+                        <p>Access future market trends with over 99% accuracy through deep learning.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <p class="icon">🔒</p>
-                    <h4>Military-Grade Security</h4>
-                    <p>Your data is protected by end-to-end encryption and blockchain.</p>
-                </div>
-                </div>
+            </div>
         </section>
-
+        
+        <!-- ========================================================================= -->
+        <!-- PRICING: Seção de Preços. Requer JS para alternância Mensal/Anual. -->
+        <!-- ========================================================================= -->
         <section id="pricing" class="pricing hidden-element">
             <div class="container">
                 <h3>Simple, Transparent Pricing</h3>
-                <div class="price-switch">Monthly | Annually</div> 
-
+                
+                <!-- Container para o switch de preços Mensal/Anual (Botões) -->
                 <div class="pricing-cards">
-                    <div class="card">
-                        <h4>Basic Plan</h4>
-                        <p class="price">$49/mo</p>
-                        <ul class="features-list">
-                            <li>5,000 Data Queries</li>
-                            <li>Standard Reporting</li>
-                            <li>Email Support</li>
-                        </ul>
-                        <a href="#" class="btn-secondary">Choose Basic</a>
-                    </div>
+    
+    <div class="card">
+        <h4>Basic Plan</h4>
+        <p class="price" data-monthly="$49" data-annually="$39">$49/mo</p>
+        <ul class="features-list">
+            <li>5,000 Data Queries</li>
+            <li>Standard Reporting</li>
+            <li>Email Support</li>
+            <li class="disabled">Priority Support</li>
+            <li class="disabled">Dedicated AI Model</li>
+        </ul>
+        <a href="#" class="btn-secondary">Choose Basic</a>
+    </div>
+
+                <div class="card **most-popular**">
+                    <span class="badge">Most Popular</span>
+                    <h4>Pro Plan</h4>
+                    <p class="price" data-monthly="$99" data-annually="$79">$99/mo</p>
+                    <ul class="features-list">
+                        <li>Unlimited Data Queries</li>
+                        <li>Advanced Predictive Reports</li>
+                        <li>Priority Support</li>
+                        <li>Multi-User Access</li>
+                        <li class="disabled">Dedicated AI Model</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Choose Pro</a>
                 </div>
+
+                <div class="card">
+                    <h4>Enterprise</h4>
+                    <p class="price" data-monthly="$249" data-annually="$199">$249/mo</p>
+                    <ul class="features-list">
+                        <li>Unlimited Data Queries</li>
+                        <li>Advanced Predictive Reports</li>
+                        <li>Priority Support</li>
+                        <li>Multi-User Access</li>
+                        <li>Dedicated AI Model</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Contact Sales</a>
                 </div>
+            </div>
+                    <!-- DUPLIQUE AQUI PARA MAIS PLANOS (PRO, ENTERPRISE) -->
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- ========================================================================= -->
+    <!-- FOOTER: Rodapé (Usa 'hidden-element' para Progressive Loading) -->
+    <!-- ========================================================================= -->
     <footer class="footer hidden-element">
         <div class="container">
             <p>&copy; 2025 AI-CORE. All Rights Reserved.</p>
@@ -91,6 +160,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <!-- Script Principal - Contém Progressive Loading, Typing Effect e Pricing Switch (main.js) -->
+    <script src="assets/main.js"></script>
 </body>
 </html>

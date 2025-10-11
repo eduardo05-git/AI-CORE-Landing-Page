@@ -1,17 +1,22 @@
 /* ========================================================== */
 /* 1. VARIÁVEIS DE COR E TIPOGRAFIA (DEFINIÇÃO GLOBAL) */
+/* 💥 DARK MODE: Paleta de Cores do AI-CORE 💥 */
 /* ========================================================== */
 :root {
-    /* Base do Dark Mode */
-    --color-dark: #121212;      
-    --color-background: #1e1e1e; 
-    --color-text-light: #F4F4F9; 
-    --color-text-secondary: #AAAAAA; 
+    /* Cores de Base (DARK MODE) */
+    --color-dark-bg: #11141A;          /* Fundo principal mais escuro */
+    --color-medium-dark-bg: #1A1F29;   /* Fundo de seções/cards */
+    --color-light-text: #F4F4F9;       /* Texto principal claro */
+    --color-secondary-text: #B0B0B0;   /* Texto secundário ou descrições */
 
-    /* Cor de Destaque (Ciano/Azul Elétrico - Profissional, Clean) */
-    --color-primary-accent: #00bcd4; 
+    /* Cor de Destaque */
+    --color-primary-accent: #00bcd4; /* Ciano/Azul Elétrico */
     --color-cta-button: #00bcd4;     
-
+    
+    /* Bordas e Elementos Sutis */
+    --color-border-dark: rgba(255, 255, 255, 0.1); /* Bordas claras e sutis (para Dark Mode) */
+    --color-glass-border: rgba(255, 255, 255, 0.18); /* Borda do "vidro fosco" */
+    
     /* Tipografia */
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Roboto', sans-serif;
@@ -27,10 +32,12 @@
 }
 
 body {
-    background-color: var(--color-dark);
-    color: var(--color-text-light);
+    /* 💥 Fundo com gradiente azul escuro (Wallpaper Animado) */
+    background: radial-gradient(circle at center, #020202 40%, #042153 80%);
+    color: var(--color-light-text); 
     font-family: var(--font-body);
     line-height: 1.6;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada (CRÍTICO) */
 }
 
 .container {
@@ -39,7 +46,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- ESTILOS DE BOTÃO (CRUCIAL PARA CONVERSÃO) --- */
+/* --- ESTILOS DE BOTÃO (Foco na Consistência) --- */
 .btn-cta, .btn-primary, .btn-secondary {
     display: inline-block;
     padding: 12px 25px;
@@ -48,20 +55,39 @@ body {
     text-decoration: none;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     text-align: center;
 }
 
+/* Botão Principal (A cor que gera a conversão) */
 .btn-primary {
     background-color: var(--color-primary-accent);
-    color: var(--color-dark); 
+    color: var(--color-dark-bg); /* Texto escuro no botão ciano */
+}
+.btn-primary:hover {
+    background-color: #31def7; /* Ciano mais claro no hover */
 }
 
-/* --- CLASSE DE PROGRESSIVE LOADING (ANIMAÇÃO) --- */
+/* Botão CTA no Header (Estilo Dark Mode Invertido) */
+.btn-cta {
+    background-color: var(--color-medium-dark-bg); 
+    color: var(--color-light-text); 
+    border: 1px solid var(--color-border-dark);
+}
+.btn-cta:hover {
+    background-color: #2a303a; 
+    color: var(--color-primary-accent); 
+}
+
+
+/* --- CLASSES DE ANIMAÇÃO (Progressive Loading) --- */
+/* CRÍTICO: Usado para o fade-in suave */
 .hidden-element {
     opacity: 0;
     transform: translateY(15px); 
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+    /* Esta deve ser a curva para fluidez: 3s de duração com curva suave */
+    transition: opacity 3s cubic-bezier(0.2, 1, 0.3, 1), 
+                transform 3s cubic-bezier(0.2, 1, 0.3, 1); 
 }
 
 .visible-element {
@@ -69,12 +95,24 @@ body {
     transform: translateY(0);
 }
 
+/* --- HIGHLIGHT CLASS (Destaque Ciano) --- */
+.highlight {
+    color: var(--color-primary-accent);
+    font-weight: 700;
+}
+
 /* ========================================================== */
-/* 3. HEADER (Estilo Básico) */
+/* 3. HEADER (Navegação) */
 /* ========================================================== */
 .header {
     padding: 15px 0;
-    border-bottom: 1px solid #282828; 
+    background-color: transparent; /* Permite ver o gradiente de fundo */
+    border-bottom: 1px solid var(--color-border-dark); 
+    position: absolute; /* Fixa no topo para o Hero deslizar por baixo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Garante que fique acima de tudo */
 }
 
 .header .container {
@@ -86,118 +124,296 @@ body {
 .logo {
     font-family: var(--font-heading);
     font-size: 1.8rem;
-    color: var(--color-primary-accent);
+    color: #00bcd4; 
 }
 
 .nav a {
-    color: var(--color-text-secondary);
-    margin-left: 30px;
+    color: var(--color-light-text); 
+    margin-left: 25px;
     text-decoration: none;
-    /* Remove a margem no botão CTA para alinhamento */
-    margin-left: 15px; 
+    transition: color 0.3s;
+}
+
+.nav a:hover:not(.btn-cta) {
+    color: var(--color-primary-accent); 
+}
+
+/* Icone de Usuário (Acessibilidade) */
+.user-icon {
+    font-size: 1.5rem;
+    color: var(--color-light-text);
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.user-icon:hover {
+    color: var(--color-primary-accent);
 }
 
 /* ========================================================== */
-/* 4. HERO SECTION (Usaremos Flexbox para responsividade) */
+/* 4. HERO SECTION (O "Vidro Fosco" - O maior desafio) */
 /* ========================================================== */
+.hero {
+    height: 100vh; /* Altura total da tela para o bloco flutuar */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px; 
+    position: relative;
+    z-index: 1; 
+}
+
+/* 💥 O EFEITO DE "VIDRO FOSCO" (Glass Card) 💥 */
 .hero .container {
+    position: relative;
+    z-index: 2; /* Acima do fundo e do LED rotacional */
+    overflow: hidden; /* CRÍTICO: Esconde a parte do LED que sai do bloco */
+    
+    background: rgba(255, 255, 255, 0.08); /* Fundo sutilmente claro, semi-transparente */
+    border-radius: 36px; 
+    
+    backdrop-filter: blur(25px); /* Desfoque CRÍTICO para o efeito Glass */
+    -webkit-backdrop-filter: blur(25px);
+    
+    /* Efeito de LED/Neon na Borda */
+    border: 1px solid rgba(10, 207, 233, 0.4); 
+    box-shadow: 
+        0 0 20px rgba(0, 188, 212, 0.3),  /* Sombra Ciano interna (glow) */
+        0 0 50px rgba(21, 214, 240, 0.2),  /* Sombra Ciano externa mais suave */
+        0 8px 50px 0 rgba(0,0,0,0.25);     /* Sombra escura padrão para profundidade */
+    
+    width: 90%; 
+    max-width: 1400px; 
+    height: 75vh; 
     display: flex;
     align-items: center;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    justify-content: center;
+    padding: 0; 
 }
 
+/* Conteúdo dentro do Hero (garante legibilidade) */
 .hero-content {
-    flex: 1; 
-    padding-right: 40px;
+    color: var(--color-light-text); 
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
 }
 
 .hero-content h2 {
+    /* CRÍTICO: Previne o "Layout Shift" durante o Typing Effect */
+    min-height: 200px; 
+    
     font-family: var(--font-heading);
-    font-size: 3rem;
-    line-height: 1.1;
-    margin-bottom: 20px;
+    font-size: 3.5rem; 
+    line-height: 1.12;
+    margin-bottom: 22px;
 }
 
 .hero-content p {
-    margin-bottom: 30px;
-    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: var(--color-secondary-text);
 }
 
+/* Formulário de Inscrição (Otimizado para Dark Mode e usabilidade) */
 .subscribe-form {
-    display: flex; /* Alinha input e botão */
+    display: flex;
+    justify-content: center;
     margin-bottom: 15px;
 }
 
 .subscribe-form input {
-    padding: 12px;
+    padding: 15px 14px; 
     font-size: 1rem;
-    border: 1px solid #444;
-    background-color: var(--color-background);
-    color: var(--color-text-light);
-    border-radius: 4px 0 0 4px;
-    flex-grow: 1;
-    min-width: 150px;
+    border: 1px solid var(--color-border-dark); 
+    background-color: var(--color-medium-dark-bg); 
+    color: var(--color-light-text); 
+    border-radius: 4px 0 0 4px; /* Cantos arredondados na esquerda */
+    flex: 0 1 300px; 
+    transition: all 0.3s ease;
+}
+.subscribe-form input::placeholder {
+    color: var(--color-secondary-text); 
+}
+.subscribe-form input:focus {
+    outline: none; 
+    border-color: var(--color-primary-accent); 
+    box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.5); 
+    background-color: #2a303a; 
 }
 
 .subscribe-form .btn-primary {
-    border-radius: 0 4px 4px 0;
-    padding: 12px 20px;
+    padding: 15px 26px; 
+    border-radius: 0 4px 4px 0; /* Cantos arredondados na direita */
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.subscribe-form .btn-primary:hover {
+    background-color: #31def7; 
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.8); 
 }
 
-.hero-visual {
-    flex: 1;
+
+/* ========================================================== */
+/* 9. ANIMAÇÃO DE LED ROTACIONAL NO HERO (ONDA DE ENERGIA) */
+/* ========================================================== */
+
+.rotating-border-pole {
+    position: absolute;
+    inset: -100px; 
+    pointer-events: none;
+    z-index: 1; 
+    border-radius: 36px;
+    /* 💥 Rotação mais lenta e suave (16s) 💥 */
+    animation: rotate-glow 16s linear infinite; 
+}
+
+
+
+/* 💥 NOVO: Keyframes para a Ondulação / Pulsação (Intensidade) 💥 */
+/* Faz a luz piscar mais forte e fraco para simular a onda */
+@keyframes pulse-wave {
+    0% {
+        opacity: 0.5; /* Ponto mais fraco da luz */
+        /* Reduz o brilho da sombra para simular a onda "baixa" */
+        box-shadow: 
+            0 0 5px 2px var(--color-primary-accent), 
+            100px 100px 0 5px rgba(0, 188, 212, 0.4);
+    }
+    50% {
+        opacity: 1; /* Ponto mais forte da luz (Onda) */
+        /* Aumenta o brilho da sombra para simular a onda "alta" */
+        box-shadow: 
+            0 0 25px 8px var(--color-primary-accent), 
+            100px 100px 0 15px rgba(0, 188, 212, 0.9);
+    }
+    100% {
+        opacity: 0.5;
+        box-shadow: 
+            0 0 5px 2px var(--color-primary-accent), 
+            100px 100px 0 5px rgba(0, 188, 212, 0.4);
+    }
+}
+
+
+/* ========================================================== */
+/* 10. FEATURES SECTION (Grid de Cards) */
+/* ========================================================== */
+.features-grid {
+    padding: 80px 0;
     text-align: center;
-    min-width: 300px;
+    background: var(--color-medium-dark-bg); /* Fundo ligeiramente mais claro que o Body */
+    color: var(--color-light-text);
 }
 
-.hero-visual img {
-    max-width: 80%;
-    height: auto;
+.features-grid h3 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid de 4 colunas responsivas */
+    gap: 40px;
+}
+
+.feature-card {
+    background: var(--color-dark-bg); 
+    padding: 35px 25px;
+    border-radius: 18px; 
+    border: 1px solid var(--color-border-dark); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px); /* Efeito de subida no hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35); 
+}
+
+.feature-card .icon {
+    font-size: 2.5rem; 
+    color: var(--color-primary-accent);
+    margin-bottom: 20px;
+}
+
+.feature-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--color-light-text); 
+}
+
+.feature-card p {
+    color: var(--color-secondary-text); 
+    font-size: 1rem;
+}
+
+
+/* ========================================================== */
+/* 11. FOOTER */
+/* ========================================================== */
+.footer {
+    padding: 40px 0 25px 0;
+    background: var(--color-dark-bg);
+    color: var(--color-secondary-text);
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--color-border-dark);
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: var(--color-secondary-text);
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--color-primary-accent);
 }
 
 /* ========================================================== */
-/* 5. RESPONSIVIDADE (MOBILE-FIRST CHECK - CRÍTICO ENVATO) */
+/* 12. RESPONSIVIDADE (MOBILE-FIRST QUERIES) */
 /* ========================================================== */
 @media (max-width: 768px) {
-    
-    /* === HEADER E NAVEGAÇÃO === */
     .header .container {
         flex-direction: column;
-        text-align: center;
+        gap: 15px;
     }
     .nav {
-        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
     .nav a {
-        margin: 0 10px;
+        margin-left: 0;
     }
 
-    /* === HERO SECTION === */
     .hero .container {
-        flex-direction: column; /* Empilha o texto e o visual */
-        text-align: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-
-    .hero-content {
-        padding-right: 0;
-        order: 2; 
+        width: 95%; 
+        height: auto; 
+        padding: 30px 20px; 
+        border-radius: 20px;
     }
     
-    .hero-visual {
-        order: 1;
-        margin-bottom: 30px;
+    .hero-content h2 {
+        font-size: 2.5rem;
     }
     
     .subscribe-form {
-        flex-direction: column; /* Input e botão em colunas */
+        flex-direction: column;
     }
 
     .subscribe-form input, .subscribe-form .btn-primary {
         border-radius: 4px;
         margin-bottom: 10px;
         width: 100%;
+        padding: 12px 20px;
     }
 }
