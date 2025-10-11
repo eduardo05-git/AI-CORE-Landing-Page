@@ -1,0 +1,203 @@
+/* ========================================================== */
+/* 1. VARIÁVEIS DE COR E TIPOGRAFIA (DEFINIÇÃO GLOBAL) */
+/* ========================================================== */
+:root {
+    /* Base do Dark Mode */
+    --color-dark: #121212;      
+    --color-background: #1e1e1e; 
+    --color-text-light: #F4F4F9; 
+    --color-text-secondary: #AAAAAA; 
+
+    /* Cor de Destaque (Ciano/Azul Elétrico - Profissional, Clean) */
+    --color-primary-accent: #00bcd4; 
+    --color-cta-button: #00bcd4;     
+
+    /* Tipografia */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+/* ========================================================== */
+/* 2. BASE GERAL E CLASSES DE UTILIDADE */
+/* ========================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-dark);
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- ESTILOS DE BOTÃO (CRUCIAL PARA CONVERSÃO) --- */
+.btn-cta, .btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--color-primary-accent);
+    color: var(--color-dark); 
+}
+
+/* --- CLASSE DE PROGRESSIVE LOADING (ANIMAÇÃO) --- */
+.hidden-element {
+    opacity: 0;
+    transform: translateY(15px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
+}
+
+.visible-element {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================================== */
+/* 3. HEADER (Estilo Básico) */
+/* ========================================================== */
+.header {
+    padding: 15px 0;
+    border-bottom: 1px solid #282828; 
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--color-primary-accent);
+}
+
+.nav a {
+    color: var(--color-text-secondary);
+    margin-left: 30px;
+    text-decoration: none;
+    /* Remove a margem no botão CTA para alinhamento */
+    margin-left: 15px; 
+}
+
+/* ========================================================== */
+/* 4. HERO SECTION (Usaremos Flexbox para responsividade) */
+/* ========================================================== */
+.hero .container {
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.hero-content {
+    flex: 1; 
+    padding-right: 40px;
+}
+
+.hero-content h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    margin-bottom: 30px;
+    color: var(--color-text-secondary);
+}
+
+.subscribe-form {
+    display: flex; /* Alinha input e botão */
+    margin-bottom: 15px;
+}
+
+.subscribe-form input {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #444;
+    background-color: var(--color-background);
+    color: var(--color-text-light);
+    border-radius: 4px 0 0 4px;
+    flex-grow: 1;
+    min-width: 150px;
+}
+
+.subscribe-form .btn-primary {
+    border-radius: 0 4px 4px 0;
+    padding: 12px 20px;
+}
+
+.hero-visual {
+    flex: 1;
+    text-align: center;
+    min-width: 300px;
+}
+
+.hero-visual img {
+    max-width: 80%;
+    height: auto;
+}
+
+/* ========================================================== */
+/* 5. RESPONSIVIDADE (MOBILE-FIRST CHECK - CRÍTICO ENVATO) */
+/* ========================================================== */
+@media (max-width: 768px) {
+    
+    /* === HEADER E NAVEGAÇÃO === */
+    .header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .nav {
+        margin-top: 15px;
+    }
+    .nav a {
+        margin: 0 10px;
+    }
+
+    /* === HERO SECTION === */
+    .hero .container {
+        flex-direction: column; /* Empilha o texto e o visual */
+        text-align: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        order: 2; 
+    }
+    
+    .hero-visual {
+        order: 1;
+        margin-bottom: 30px;
+    }
+    
+    .subscribe-form {
+        flex-direction: column; /* Input e botão em colunas */
+    }
+
+    .subscribe-form input, .subscribe-form .btn-primary {
+        border-radius: 4px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
