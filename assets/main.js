@@ -88,4 +88,27 @@ setTimeout(() => {
     
     // INICIA O EFEITO DE DIGITAÇÃO
     startTypingEffect();
+
+    // --- 3. FUNÇÃO: PRICE TOGGLE (MENSAL/ANUAL) ---
+    const pricingSwitch = document.getElementById('pricing-switch');
+    const prices = document.querySelectorAll('.price');
+    const monthlyLabel = document.querySelector('.toggle-label.monthly');
+    const annuallyLabel = document.querySelector('.toggle-label.annually');
+
+    if (pricingSwitch) {
+        pricingSwitch.addEventListener('change', () => {
+            const isChecked = pricingSwitch.checked; // true = Anual, false = Mensal
+
+            prices.forEach(price => {
+                if (isChecked) {
+                    price.textContent = price.dataset.annually + '/yr';
+                } else {
+                    price.textContent = price.dataset.monthly + '/mo';
+                }
+            });
+
+            monthlyLabel.classList.toggle('active', !isChecked);
+            annuallyLabel.classList.toggle('active', isChecked);
+        });
+    }
 });
