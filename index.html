@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- TÍTULO DO TEMPLATE (Crucial para SEO e Envato) -->
     <title>AI-CORE | Minimalist SaaS Landing Page</title>
-    
+
     <!-- Importação de Fontes Premium (Poppins para Títulos, Roboto para Corpo) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+
     <!-- Importação de Ícones (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -45,13 +45,13 @@
                 <div class="hero-content">
                     <!-- H2: Target do JavaScript para o efeito Typing Effect (Máquina de Escrever) -->
                     <h2><span id="typing-text" class="typing-effect"></span></h2>
-                    
+
                     <!-- Subtítulo: Fica estático para dar contexto imediato -->
                     <p>Dive into the art assets, where innovative blockchain technology meets financial expertise.</p>
-                    
+
                     <!-- Formulário de Conversão (Call-to-Action Principal) -->
                     <form class="subscribe-form">
-                        <input class="email-input" type="email" placeholder="Enter your corporate email" aria-label="Corporate Email Input" required>
+                        <input type="email" placeholder="Enter your corporate email" aria-label="Corporate Email Input" required>
                         <button type="submit" class="btn-primary">Get Instant Access</button>
                     </form>
                 </div>
@@ -90,17 +90,26 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- ========================================================================= -->
         <!-- PRICING: Seção de Preços. Requer JS para alternância Mensal/Anual. -->
         <!-- ========================================================================= -->
         <section id="pricing" class="pricing hidden-element">
             <div class="container">
                 <h3>Simple, Transparent Pricing</h3>
-                
+
+                <div class="pricing-toggle">
+                    <span class="toggle-label monthly active">Monthly</span>
+                    <label class="switch">
+                        <input type="checkbox" id="pricing-switch">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label annually">Annually</span>
+                </div>
+
                 <!-- Container para o switch de preços Mensal/Anual (Botões) -->
                 <div class="pricing-cards">
-    
+
     <div class="card">
         <h4>Basic Plan</h4>
         <p class="price" data-monthly="$49" data-annually="$39">$49/mo</p>
@@ -163,4 +172,3 @@
     <!-- Script Principal - Contém Progressive Loading, Typing Effect e Pricing Switch (main.js) -->
     <script src="assets/main.js"></script>
 </body>
-</html>
