@@ -1,0 +1,61 @@
+# Images Directory
+
+This directory contains all image assets for the AI-CORE template.
+
+## Required Images
+
+### Preview Images
+- `preview-image.jpg` - Main preview image (1200x630px) for social sharing
+- `preview-mobile.jpg` - Mobile preview (375x667px)
+- `preview-tablet.jpg` - Tablet preview (768x1024px)
+
+### Icons
+- `favicon.ico` - Browser favicon (32x32px)
+- `apple-touch-icon.png` - iOS home screen icon (180x180px)
+- `android-chrome-192x192.png` - Android icon (192x192px)
+- `android-chrome-512x512.png` - Android icon (512x512px)
+
+### Demo Images
+- `hero-bg.jpg` - Hero section background (1920x1080px)
+- `feature-1.jpg` - Feature 1 illustration (400x300px)
+- `feature-2.jpg` - Feature 2 illustration (400x300px)
+- `feature-3.jpg` - Feature 3 illustration (400x300px)
+- `feature-4.jpg` - Feature 4 illustration (400x300px)
+
+## Image Guidelines
+
+### Format
+- Use WebP format for better compression
+- Provide JPEG fallbacks for older browsers
+- Optimize images for web (under 500KB each)
+
+### Quality
+- High resolution for retina displays
+- Compressed for fast loading
+- Consistent aspect ratios
+
+### Accessibility
+- Include alt text for all images
+- Use descriptive filenames
+- Ensure sufficient color contrast
+
+## Optimization Tools
+
+### Online Tools
+- TinyPNG.com - Image compression
+- Squoosh.app - Format conversion
+- ImageOptim - Batch optimization
+
+### Command Line
+```bash
+# Install imagemin-cli
+npm install -g imagemin-cli
+
+# Optimize images
+imagemin assets/images/*.jpg --out-dir=assets/images/optimized
+```
+
+## License
+
+All placeholder images are for demonstration purposes only.
+Replace with your own licensed images before commercial use.

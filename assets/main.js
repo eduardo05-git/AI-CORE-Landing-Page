@@ -89,7 +89,78 @@ setTimeout(() => {
     // INICIA O EFEITO DE DIGITAÇÃO
     startTypingEffect();
 
-    // --- 3. FUNÇÃO: PRICE TOGGLE (MENSAL/ANUAL) ---
+    // --- 3. FUNÇÃO: FORM VALIDATION ---
+    const heroForm = document.getElementById('hero-form');
+    const emailInput = document.getElementById('hero-email');
+    const errorMessage = document.getElementById('email-error');
+
+    if (heroForm && emailInput && errorMessage) {
+        // Real-time validation
+        emailInput.addEventListener('input', function() {
+            validateEmail();
+        });
+
+        // Form submission
+        heroForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateEmail()) {
+                // Simulate form submission
+                showSuccessMessage();
+            }
+        });
+
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email === '') {
+                showError('Email is required');
+                return false;
+            } else if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address');
+                return false;
+            } else {
+                hideError();
+                return true;
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            emailInput.setAttribute('aria-invalid', 'true');
+        }
+
+        function hideError() {
+            errorMessage.classList.remove('show');
+            emailInput.setAttribute('aria-invalid', 'false');
+        }
+
+        function showSuccessMessage() {
+            // Create success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = `
+                <div style="background: #00bcd4; color: white; padding: 15px; border-radius: 8px; text-align: center; margin-top: 15px;">
+                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+                    Thank you! Check your email for access instructions.
+                </div>
+            `;
+            
+            heroForm.appendChild(successDiv);
+            
+            // Reset form
+            emailInput.value = '';
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        }
+    }
+
+    // --- 4. FUNÇÃO: PRICE TOGGLE (MENSAL/ANUAL) ---
     const pricingSwitch = document.getElementById('pricing-switch');
     const prices = document.querySelectorAll('.price');
     const monthlyLabel = document.querySelector('.toggle-label.monthly');
