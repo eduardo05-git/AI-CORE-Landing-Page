@@ -302,49 +302,6 @@ body {
     border: 0;
 }
 
-
-/* ========================================================== */
-/* 9. ANIMAÇÃO DE LED ROTACIONAL NO HERO (ONDA DE ENERGIA) */
-/* ========================================================== */
-
-.rotating-border-pole {
-    position: absolute;
-    inset: -100px; 
-    pointer-events: none;
-    z-index: 1; 
-    border-radius: 36px;
-    /* 💥 Rotação mais lenta e suave (16s) 💥 */
-    animation: rotate-glow 16s linear infinite; 
-}
-
-
-
-/* 💥 NOVO: Keyframes para a Ondulação / Pulsação (Intensidade) 💥 */
-/* Faz a luz piscar mais forte e fraco para simular a onda */
-@keyframes pulse-wave {
-    0% {
-        opacity: 0.5; /* Ponto mais fraco da luz */
-        /* Reduz o brilho da sombra para simular a onda "baixa" */
-        box-shadow: 
-            0 0 5px 2px var(--color-primary-accent), 
-            100px 100px 0 5px rgba(0, 188, 212, 0.4);
-    }
-    50% {
-        opacity: 1; /* Ponto mais forte da luz (Onda) */
-        /* Aumenta o brilho da sombra para simular a onda "alta" */
-        box-shadow: 
-            0 0 25px 8px var(--color-primary-accent), 
-            100px 100px 0 15px rgba(0, 188, 212, 0.9);
-    }
-    100% {
-        opacity: 0.5;
-        box-shadow: 
-            0 0 5px 2px var(--color-primary-accent), 
-            100px 100px 0 5px rgba(0, 188, 212, 0.4);
-    }
-}
-
-
 /* ========================================================== */
 /* 10. FEATURES SECTION (Grid de Cards) */
 /* ========================================================== */
@@ -630,4 +587,6 @@ input:checked + .slider:before {
         width: 100%;
         padding: 12px 20px;
     }
+
+    
     }
