@@ -97,34 +97,250 @@
         
 
         <!-- ========================================================================= -->
-        <!-- FEATURES: Grid de recursos (Justifica o preço) -->
-        <!-- Usa CSS Grid para layout responsivo. A classe 'hidden-element' ativa a animação. -->
+        <!-- FEATURES: Carrossel Automático de Recursos (Futurista e Profissional) -->
+        <!-- Carrossel que pausa no hover, mantendo a estética azul futurista -->
         <!-- ========================================================================= -->
-        <section id="features" class="features-grid hidden-element">
+        <section id="features" class="features-carousel hidden-element">
             <div class="container">
                 <h3>Why Our AI Outperforms the Competition</h3>
-                <div class="features-container">
-                    <!-- Cards de Recursos (Usam Flexbox/Grid e Efeito Hover) -->
-                    <div class="feature-card">
-                        <p class="icon">⚡</p>
-                        <h4>Real-Time Analysis</h4>
-                        <p>Process billions of data points per second with zero latency.</p>
+                <p class="features-subtitle">Discover the cutting-edge features that set us apart</p>
+                
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Primeira sequência de features -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4>Real-Time Analysis</h4>
+                            <p>Process billions of data points per second with zero latency and instant insights.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Military-Grade Security</h4>
+                            <p>Your data is protected by end-to-end encryption and blockchain technology.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h4>Seamless Integration</h4>
+                            <p>Connect to any existing CRM or data warehouse in under 5 minutes.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Predictive Modeling</h4>
+                            <p>Access future market trends with over 99% accuracy through deep learning.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Advanced Analytics</h4>
+                            <p>Comprehensive reporting and visualization tools for data-driven decisions.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h4>AI Automation</h4>
+                            <p>Intelligent workflow automation that adapts to your business processes.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4>Cloud Infrastructure</h4>
+                            <p>Scalable cloud solutions with 99.9% uptime and global accessibility.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Team Collaboration</h4>
+                            <p>Real-time collaboration tools for seamless team coordination and sharing.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Data Management</h4>
+                            <p>Advanced data storage, processing, and management with enterprise-grade reliability.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Mobile Access</h4>
+                            <p>Full platform access on any device with responsive design and native apps.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4>Custom Workflows</h4>
+                            <p>Build and customize workflows that perfectly match your business requirements.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h4>24/7 Support</h4>
+                            <p>Round-the-clock expert support with dedicated account managers and priority assistance.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <!-- Segunda sequência (duplicação para infinito) -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4>Real-Time Analysis</h4>
+                            <p>Process billions of data points per second with zero latency and instant insights.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Military-Grade Security</h4>
+                            <p>Your data is protected by end-to-end encryption and blockchain technology.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h4>Seamless Integration</h4>
+                            <p>Connect to any existing CRM or data warehouse in under 5 minutes.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4>Predictive Modeling</h4>
+                            <p>Access future market trends with over 99% accuracy through deep learning.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Advanced Analytics</h4>
+                            <p>Comprehensive reporting and visualization tools for data-driven decisions.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h4>AI Automation</h4>
+                            <p>Intelligent workflow automation that adapts to your business processes.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4>Cloud Infrastructure</h4>
+                            <p>Scalable cloud solutions with 99.9% uptime and global accessibility.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Team Collaboration</h4>
+                            <p>Real-time collaboration tools for seamless team coordination and sharing.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Data Management</h4>
+                            <p>Advanced data storage, processing, and management with enterprise-grade reliability.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Mobile Access</h4>
+                            <p>Full platform access on any device with responsive design and native apps.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4>Custom Workflows</h4>
+                            <p>Build and customize workflows that perfectly match your business requirements.</p>
+                            <div class="feature-glow"></div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h4>24/7 Support</h4>
+                            <p>Round-the-clock expert support with dedicated account managers and priority assistance.</p>
+                            <div class="feature-glow"></div>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <p class="icon">🔒</p>
-                        <h4>Military-Grade Security</h4>
-                        <p>Your data is protected by end-to-end encryption and blockchain.</p>
-                    </div>
-                    <div class="feature-card">
-                        <p class="icon">⚙️</p>
-                        <h4>Seamless Integration</h4>
-                        <p>Connect to any existing CRM or data warehouse in under 5 minutes.</p>
-                    </div>
-                    <div class="feature-card">
-                        <p class="icon">🧠</p>
-                        <h4>Predictive Modeling</h4>
-                        <p>Access future market trends with over 99% accuracy through deep learning.</p>
-                    </div>
+                </div>
+                
+                <!-- Indicadores de progresso (atualizados para 12 features) -->
+                <div class="carousel-indicators">
+                    <div class="indicator active" data-slide="0"></div>
+                    <div class="indicator" data-slide="1"></div>
+                    <div class="indicator" data-slide="2"></div>
+                    <div class="indicator" data-slide="3"></div>
+                    <div class="indicator" data-slide="4"></div>
+                    <div class="indicator" data-slide="5"></div>
+                    <div class="indicator" data-slide="6"></div>
+                    <div class="indicator" data-slide="7"></div>
+                    <div class="indicator" data-slide="8"></div>
+                    <div class="indicator" data-slide="9"></div>
+                    <div class="indicator" data-slide="10"></div>
+                    <div class="indicator" data-slide="11"></div>
                 </div>
             </div>
         </section>

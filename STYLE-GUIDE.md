@@ -266,3 +266,5 @@ box-shadow:
 ---
 
 This style guide ensures consistency and helps maintain the high quality of the AI-CORE template across all customizations.
+
+

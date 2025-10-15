@@ -32,12 +32,21 @@
 }
 
 body {
-    /* 💥 Fundo com gradiente azul escuro (Wallpaper Animado) */
-    background: radial-gradient(circle at center, #020202 40%, #042153 80%);
+    /* 💥 Gradiente Escuro Unificado (Mantém o tema dark do hero) */
+    background: 
+        /* Gradiente escuro sutil que mantém a intensidade do hero */
+        linear-gradient(180deg, 
+            #020202 0%, 
+            #042153 30%, 
+            #062041 60%, 
+            #0a1a3a 85%, 
+            #0e1e3a 100%
+        );
     color: var(--color-light-text); 
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden; /* Evita rolagem horizontal indesejada (CRÍTICO) */
+    min-height: 100vh;
 }
 
 .container {
@@ -303,27 +312,273 @@ body {
 }
 
 /* ========================================================== */
-/* 10. FEATURES SECTION (Grid de Cards) */
+/* 10. FEATURES CAROUSEL SECTION (Carrossel Automático Futurista) */
 /* ========================================================== */
-.features-grid {
-    padding: 80px 0;
+.features-carousel {
+    padding: 100px 0;
     text-align: center;
-    background: var(--color-medium-dark-bg); /* Fundo ligeiramente mais claro que o Body */
+    background: transparent; /* Usa o gradiente unificado do body */
     color: var(--color-light-text);
+    position: relative;
+    overflow: hidden;
 }
 
-.features-grid h3 {
+/* Efeito de transição suave entre hero e features */
+.features-carousel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 188, 212, 0.4) 50%, 
+        transparent 100%
+    );
+}
+
+.features-carousel h3 {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin-bottom: 50px;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, var(--color-light-text) 0%, var(--color-primary-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.features-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-secondary-text);
+    margin-bottom: 60px;
+    font-weight: 300;
+}
+
+/* Container do Carrossel - Ocupa toda a largura */
+.carousel-container {
+    position: relative;
+    width: 100vw; /* Largura total da viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    padding: 20px 0;
+    margin: 0 0 40px 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 25px;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: infiniteScroll 60s linear infinite;
+    width: calc(200% + 50px); /* Duplicação para infinito */
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-track.manual-control {
+    animation: none !important;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animação do carrossel infinito */
+@keyframes infiniteScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Move exatamente metade da largura total */
+    }
+}
+
+/* Cards do Carrossel */
+.features-carousel .feature-card {
+    flex: 0 0 320px; /* Tamanho reduzido para melhor distribuição */
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(0, 188, 212, 0.25);
+    border-radius: 20px;
+    padding: 35px 25px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    margin: 0 10px; /* Margem para espaçamento nas bordas */
+}
+
+.features-carousel .feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--color-primary-accent);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 188, 212, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Ícones dos Features */
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    background: linear-gradient(135deg, var(--color-primary-accent) 0%, #31def7 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.feature-icon::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary-accent), #31def7, var(--color-primary-accent));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.features-carousel .feature-card:hover .feature-icon::before {
+    opacity: 1;
+    animation: rotate 2s linear infinite;
+}
+
+.feature-icon i {
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.features-carousel .feature-card:hover .feature-icon {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 188, 212, 0.6);
+}
+
+/* Títulos e Textos */
+.features-carousel .feature-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--color-light-text);
+    font-weight: 600;
+}
+
+.features-carousel .feature-card p {
+    color: var(--color-secondary-text);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Efeito de Glow */
+.feature-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(0, 188, 212, 0.1) 0%, 
+        rgba(49, 222, 247, 0.05) 50%, 
+        rgba(0, 188, 212, 0.1) 100%);
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.features-carousel .feature-card:hover .feature-glow {
+    opacity: 1;
+}
+
+/* Indicadores do Carrossel */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+    flex-wrap: wrap; /* Permite quebra de linha se necessário */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    flex-shrink: 0; /* Não encolhe */
+}
+
+.indicator::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary-accent), #31def7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.indicator.active,
+.indicator:hover {
+    background: var(--color-primary-accent);
+    transform: scale(1.3);
+}
+
+.indicator.active::before,
+.indicator:hover::before {
+    opacity: 0.3;
+}
+
+/* Animação de rotação para o ícone */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ========================================================== */
 /* 11. PRICING SECTION (Cards & Toggle) */
 /* ========================================================== */
 .pricing {
-    padding: 80px 0;
+    padding: 100px 0 80px 0; /* Aumenta padding superior para o badge */
     text-align: center;
+    background: transparent; /* Usa o gradiente unificado do body */
+    position: relative;
+    overflow: visible; /* Permite que o badge apareça */
+}
+
+/* Efeito de transição suave entre features e pricing */
+.pricing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 188, 212, 0.3) 50%, 
+        transparent 100%
+    );
 }
 
 .pricing h3 {
@@ -406,21 +661,33 @@ input:checked + .slider:before {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 50px;
+    padding-top: 20px; /* Espaço extra para o badge */
+    overflow: visible; /* Permite que o badge apareça */
 }
 
 .card {
-    background: var(--color-medium-dark-bg);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 30px;
     border-radius: 18px;
-    border: 1px solid var(--color-border-dark);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-align: left;
+    position: relative;
+    overflow: visible; /* Permite que o badge apareça */
 }
 
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+    border-color: rgba(0, 188, 212, 0.4);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 188, 212, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .card h4 {
@@ -476,76 +743,148 @@ input:checked + .slider:before {
     transform: translateX(-50%);
     background-color: var(--color-primary-accent);
     color: var(--color-dark-bg);
-    padding: 5px 15px;
-    border-radius: 20px;
+    padding: 8px 20px;
+    border-radius: 25px;
     font-size: 0.8rem;
     font-weight: 700;
+    z-index: 100; /* Garante que fique acima de todos os elementos */
+    box-shadow: 0 6px 20px rgba(0, 188, 212, 0.4);
+    white-space: nowrap; /* Evita quebra de linha */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Borda sutil para destaque */
 }
 
-.features-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid de 4 colunas responsivas */
-    gap: 40px;
-}
-
-.feature-card {
-    background: var(--color-dark-bg); 
-    padding: 35px 25px;
-    border-radius: 18px; 
-    border: 1px solid var(--color-border-dark); 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-8px); /* Efeito de subida no hover */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35); 
-}
-
-.feature-card .icon {
-    font-size: 2.5rem; 
-    color: var(--color-primary-accent);
-    margin-bottom: 20px;
-}
-
-.feature-card h4 {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    margin-bottom: 12px;
-    color: var(--color-light-text); 
-}
-
-.feature-card p {
-    color: var(--color-secondary-text); 
-    font-size: 1rem;
-}
 
 
 /* ========================================================== */
-/* 11. FOOTER */
+/* 11. FOOTER - VIDRO ESCURO FUTURISTA */
 /* ========================================================== */
 .footer {
-    padding: 40px 0 25px 0;
-    background: var(--color-dark-bg);
-    color: var(--color-secondary-text);
+    padding: 50px 0 30px 0;
+    margin-top: 60px;
+    
+    /* 💥 EFEITO VIDRO ESCURO FUTURISTA 💥 */
+    background: 
+        linear-gradient(135deg, 
+            rgba(0, 0, 0, 0.4) 0%, 
+            rgba(10, 20, 40, 0.6) 50%, 
+            rgba(0, 0, 0, 0.5) 100%
+        );
+    
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    
+    /* Bordas luminosas futuristas */
+    border-top: 2px solid rgba(0, 188, 212, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Sombras múltiplas para profundidade */
+    box-shadow: 
+        0 -10px 40px rgba(0, 0, 0, 0.3),
+        0 -5px 20px rgba(0, 188, 212, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 188, 212, 0.1);
+    
+    color: rgba(255, 255, 255, 0.8);
     text-align: center;
     font-size: 0.9rem;
-    border-top: 1px solid var(--color-border-dark);
+    position: relative;
+    overflow: hidden;
+    z-index: 2; /* Acima dos efeitos de fundo */
+}
+
+/* Efeito de brilho animado nas bordas */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 188, 212, 0.8), 
+        rgba(49, 222, 247, 0.8), 
+        rgba(0, 188, 212, 0.8), 
+        transparent
+    );
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+.footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 188, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(49, 222, 247, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animação do brilho nas bordas */
+@keyframes borderGlow {
+    0%, 100% {
+        left: -100%;
+        opacity: 0;
+    }
+    50% {
+        left: 100%;
+        opacity: 1;
+    }
 }
 
 .footer-links {
-    margin-top: 10px;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2; /* Acima dos efeitos de fundo */
 }
 
 .footer-links a {
-    color: var(--color-secondary-text);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.3s;
+    margin: 0 20px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    
+    /* Efeito de vidro nos links */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-links a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, 
+        rgba(0, 188, 212, 0.1) 0%, 
+        rgba(49, 222, 247, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .footer-links a:hover {
     color: var(--color-primary-accent);
+    background: rgba(0, 188, 212, 0.1);
+    border-color: rgba(0, 188, 212, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 25px rgba(0, 188, 212, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
 }
 
 /* ========================================================== */
@@ -588,5 +927,76 @@ input:checked + .slider:before {
         padding: 12px 20px;
     }
 
+    /* Features Carousel Responsivo */
+    .features-carousel h3 {
+        font-size: 2.2rem;
+    }
     
+    .features-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+    
+    .carousel-container {
+        width: 100vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .carousel-track {
+        gap: 20px;
+        animation-duration: 50s;
+    }
+    
+    .features-carousel .feature-card {
+        flex: 0 0 280px;
+        padding: 30px 20px;
+        margin: 0 5px;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+    }
+    
+    .feature-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .features-carousel .feature-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+    
+    .features-carousel .feature-card p {
+        font-size: 0.9rem;
+    }
+    
+    .carousel-indicators {
+        gap: 6px;
+        flex-wrap: wrap;
+        max-width: 600px;
+    }
+    
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
+    /* Footer Responsivo */
+    .footer {
+        padding: 40px 0 25px 0;
+        margin-top: 40px;
+    }
+    
+    .footer-links a {
+        margin: 0 10px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .footer::before {
+        animation-duration: 4s; /* Animação mais lenta no mobile */
+    }
     }

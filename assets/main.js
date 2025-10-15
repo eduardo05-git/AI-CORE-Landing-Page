@@ -182,4 +182,155 @@ setTimeout(() => {
             annuallyLabel.classList.toggle('active', isChecked);
         });
     }
+
+    // --- 5. FUNÇÃO: FEATURES CAROUSEL INFINITO (Indicadores Corrigidos) ---
+    const carouselTrack = document.getElementById('carousel-track');
+    const indicators = document.querySelectorAll('.indicator');
+    
+    if (carouselTrack && indicators.length > 0) {
+        let currentSlide = 0;
+        const totalSlides = 12; // Número total de features únicas
+        const slideWidth = 345; // Largura de cada card (320px) + gap (25px)
+        let isHovered = false;
+        let isManuallyControlled = false;
+        let autoPlayInterval;
+        
+        // Função para atualizar indicadores
+        function updateIndicators() {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Função para mover o carrossel manualmente
+        function moveToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            const translateX = -(currentSlide * slideWidth);
+            
+            // Remove animação CSS e usa controle manual
+            carouselTrack.classList.add('manual-control');
+            carouselTrack.style.transform = `translateX(${translateX}px)`;
+            
+            updateIndicators();
+            
+            // Para o auto-play temporariamente
+            clearInterval(autoPlayInterval);
+            
+            // Reinicia auto-play após 8 segundos
+            setTimeout(() => {
+                if (!isHovered) {
+                    startAutoPlay();
+                }
+            }, 8000);
+        }
+        
+        // Função para pausar animação automática
+        function pauseAnimation() {
+            isHovered = true;
+            carouselTrack.style.animationPlayState = 'paused';
+            clearInterval(autoPlayInterval);
+        }
+        
+        // Função para reiniciar animação automática
+        function resumeAnimation() {
+            isHovered = false;
+            if (!isManuallyControlled) {
+                carouselTrack.style.animationPlayState = 'running';
+                startAutoPlay();
+            }
+        }
+        
+        // Função para auto-play manual
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                if (!isHovered && !isManuallyControlled) {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    const translateX = -(currentSlide * slideWidth);
+                    carouselTrack.classList.add('manual-control');
+                    carouselTrack.style.transform = `translateX(${translateX}px)`;
+                    updateIndicators();
+                }
+            }, 5000); // Muda slide a cada 5 segundos
+        }
+        
+        // Event listeners para hover
+        carouselTrack.addEventListener('mouseenter', pauseAnimation);
+        carouselTrack.addEventListener('mouseleave', resumeAnimation);
+        
+        // Event listeners para indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                isManuallyControlled = true;
+                moveToSlide(index);
+                
+                // Permite que o auto-play retome após 15 segundos
+                setTimeout(() => {
+                    isManuallyControlled = false;
+                }, 15000);
+            });
+        });
+        
+        // Inicializa os indicadores
+        updateIndicators();
+        
+        // Inicia o auto-play manual após 3 segundos
+        setTimeout(() => {
+            if (!isHovered) {
+                startAutoPlay();
+            }
+        }, 3000);
+        
+        // Adiciona suporte para touch/swipe em dispositivos móveis
+        let startX = 0;
+        let isDragging = false;
+        
+        carouselTrack.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            pauseAnimation();
+        }, { passive: true });
+        
+        carouselTrack.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        }, { passive: false });
+        
+        carouselTrack.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            
+            if (Math.abs(diffX) > 50) { // Swipe mínimo de 50px
+                if (diffX > 0) {
+                    // Swipe para esquerda - próximo slide
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                } else {
+                    // Swipe para direita - slide anterior
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                }
+                moveToSlide(currentSlide);
+            }
+            
+            // Reinicia animação após 3 segundos
+            setTimeout(() => {
+                if (!isHovered) {
+                    resumeAnimation();
+                }
+            }, 3000);
+        }, { passive: true });
+        
+        // Adiciona suporte para navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                moveToSlide(currentSlide);
+            } else if (e.key === 'ArrowRight') {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                moveToSlide(currentSlide);
+            }
+        });
+    }
 });
