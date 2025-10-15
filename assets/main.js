@@ -61,6 +61,16 @@ function startTypingEffect() {
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
+    // --- 0. FUNÇÃO: NAVBAR ANIMATION (Descida Suave) ---
+    const header = document.querySelector('.header');
+    
+    if (header) {
+        // Pequeno delay para dar tempo da página carregar
+        setTimeout(() => {
+            header.classList.add('visible');
+        }, 300); // 300ms de delay para suavidade
+    }
+
     // --- 1. FUNÇÃO: PROGRESSIVE LOADING (Correção de Timing para Fluidez) ---
     // --- 1. FUNÇÃO: PROGRESSIVE LOADING (Correção de Fluidez Definitiva) ---
 const elementsToAnimate = document.querySelectorAll('.hidden-element');
