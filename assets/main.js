@@ -148,26 +148,45 @@ setTimeout(() => {
         }
 
         function showSuccessMessage() {
-            // Create success message
-            const successDiv = document.createElement('div');
-            successDiv.className = 'success-message';
-            successDiv.innerHTML = `
-                <div style="background: #00bcd4; color: white; padding: 15px; border-radius: 8px; text-align: center; margin-top: 15px;">
-                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
-                    Thank you! Check your email for access instructions.
-                </div>
-            `;
-            
-            heroForm.appendChild(successDiv);
-            
-            // Reset form
-            emailInput.value = '';
-            
-            // Remove success message after 5 seconds
-            setTimeout(() => {
-                successDiv.remove();
-            }, 5000);
-        }
+    // Remove qualquer mensagem de sucesso anterior
+    const existingSuccess = document.querySelector('.global-success-message');
+    if (existingSuccess) {
+        existingSuccess.remove();
+    }
+
+    // Cria a mensagem de sucesso
+    const successDiv = document.createElement('div');
+    successDiv.className = 'global-success-message';
+    successDiv.style.cssText = `
+        position: fixed;
+        top: 73%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--color-primary-accent); /* Usando a variável ciano */
+        color: var(--color-dark-bg);
+        padding: 20px 30px;
+        border-radius: 8px;
+        text-align: center;
+        z-index: 10000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        font-weight: 600;
+    `;
+    successDiv.innerHTML = `
+        <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+        Thank you! Check your email for access instructions.
+    `;
+
+    // ANEXA AO BODY, não ao formulário, para evitar o bug de layout
+    document.body.appendChild(successDiv);
+
+    // Reset form
+    document.getElementById('hero-email').value = '';
+
+    // Remove a mensagem após 5 segundos
+    setTimeout(() => {
+        successDiv.remove();
+    }, 5000);
+}
     }
 
     // --- 4. FUNÇÃO: PRICE TOGGLE (MENSAL/ANUAL) ---
