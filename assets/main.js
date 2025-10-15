@@ -58,7 +58,25 @@ function startTypingEffect() {
     type();
 }
 
+// -------------------------------------------------------------
+// --- FUNÇÃO GLOBAL: HIDE PRELOADER (Corrigida) ---
+// -------------------------------------------------------------
+function hidePreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Inicia o fade out
+        preloader.style.opacity = '0';
+        
+        // Remove o elemento do DOM após o fim da transição (500ms)
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500); 
+    }
+}
 
+// -------------------------------------------------------------
+// --- MAIN LOGIC ---
+// -------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', (event) => {
 
     // --- 0. FUNÇÃO: NAVBAR ANIMATION (Descida Suave) ---
@@ -71,32 +89,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }, 300); // 300ms de delay para suavidade
     }
 
-    // --- 1. FUNÇÃO: PROGRESSIVE LOADING (Correção de Timing para Fluidez) ---
-    // --- 1. FUNÇÃO: PROGRESSIVE LOADING (Correção de Fluidez Definitiva) ---
-const elementsToAnimate = document.querySelectorAll('.hidden-element');
+    // --- 1. FUNÇÃO: PROGRESSIVE LOADING ---
+    const elementsToAnimate = document.querySelectorAll('.hidden-element');
 
-// Define um atraso de 800 milissegundos (0.8s) para dar foco ao Hero
-setTimeout(() => {
-    elementsToAnimate.forEach((element, index) => {
-        element.style.transitionDelay = `${index * 0.1}s`; 
+    // Define um atraso de 800 milissegundos (0.8s) para dar foco ao Hero
+    // (Esta função agora lida APENAS com o conteúdo, o preloader é escondido no 'window.onload')
+    setTimeout(() => {
+        elementsToAnimate.forEach((element, index) => {
+            element.style.transitionDelay = `${index * 0.1}s`; 
 
-        // 💥 CORREÇÃO CRÍTICA: Forçar o Recálculo do CSS (Flushing) 💥
-        // Isso garante que o navegador reconheça o 'opacity: 0' antes de remover a classe.
-        void element.offsetWidth; 
+            // 💥 CORREÇÃO CRÍTICA: Forçar o Recálculo do CSS (Flushing) 💥
+            void element.offsetWidth; 
 
-        // 2. Remove a classe para iniciar a transição suave
-        element.classList.remove('hidden-element');
-        element.classList.add('visible-element');
-    });
-}, 800); 
-
-// ... (O restante do seu código JavaScript abaixo, como o startTypingEffect, permanece inalterado) ...
+            // 2. Remove a classe para iniciar a transição suave
+            element.classList.remove('hidden-element');
+            element.classList.add('visible-element');
+        });
+    }, 800); 
 
     // --- 2. FUNÇÃO: MÁQUINA DE ESCREVER (Typing Effect) ---
-    // (Mantenha sua função startTypingEffect intacta aqui)
-    // ...
-
-    // INICIA O EFEITO DE DIGITAÇÃO
     startTypingEffect();
 
     // --- 3. FUNÇÃO: FORM VALIDATION ---
@@ -362,4 +373,46 @@ setTimeout(() => {
             }
         });
     }
+
+    // --- 6. FUNÇÃO: SMOOTH SCROLL (Navegação Suave) ---
+    // Encontra todos os links de navegação interna (que começam com '#') que não são apenas '#'
+    document.querySelectorAll('.nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            
+            const targetId = this.getAttribute('href');
+            
+            // Ignora links que são apenas '#' (como botões CTA ou de usuário que não têm alvo de rolagem)
+            if (targetId.length <= 1) return;
+            
+            // 1. Previne o comportamento padrão (salto seco)
+            e.preventDefault();
+            
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                // 2. Usa o scrollIntoView com a opção 'smooth'
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start' // Alinha o topo da seção ao topo da viewport
+                });
+
+                // 3. Atualiza o URL (opcional, para refletir o hash na URL)
+                if (history.pushState) {
+                    history.pushState(null, null, targetId);
+                }
+            }
+        });
+    });
+    
+}); // Fim do DOMContentLoaded
+
+
+// -------------------------------------------------------------
+// --- NOVO BLOCO: LÓGICA DE HIDE PRELOADER (Corrigida) ---
+// -------------------------------------------------------------
+window.addEventListener('load', function() {
+    // Garante que o preloader seja escondido DEPOIS que TUDO (DOM, imagens, CSS)
+    // estiver carregado, adicionando um pequeno delay (500ms) para
+    // garantir que a animação tenha tempo de ser executada.
+    setTimeout(hidePreloader, 500); 
 });
