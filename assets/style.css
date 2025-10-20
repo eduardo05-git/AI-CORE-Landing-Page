@@ -156,6 +156,28 @@ body {
     min-height: 100vh;
 }
 
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    padding: 10px 14px;
+    background: rgba(0, 188, 212, 0.15);
+    color: var(--color-light-text);
+    border: 1px solid var(--color-primary-accent);
+    border-radius: 8px;
+    z-index: 100000;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -217,6 +239,18 @@ body {
     font-weight: 700;
 }
 
+/* Reduced Motion: respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    #preloader { display: none !important; }
+    .carousel-track { animation: none !important; }
+}
+
 /* ========================================================== */
 /* 3. HEADER (Navegação) - Animação de Descida Suave */
 /* ========================================================== */
@@ -269,6 +303,36 @@ body {
     opacity: 1;
 }
 
+/* Estado sticky: destaca levemente e fixa no topo com blur profissional */
+.header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0; /* levemente mais compacto */
+    background: rgba(10, 18, 32, 0.45); /* vidro escuro sutil */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 24px rgba(0, 188, 212, 0.08);
+    transform: translateY(0); /* garante posição natural quando sticky */
+    opacity: 1; /* sempre visível quando sticky */
+    transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.2s ease;
+}
+
+.header.sticky::before {
+    opacity: 1; /* mantém o leve veil no sticky */
+}
+
+.header.sticky .logo {
+    transform: translateY(0) scale(0.98);
+}
+
+.header.sticky .nav a,
+.header.sticky .user-icon {
+    transform: translateY(0) scale(0.99);
+}
+
 .logo {
     font-family: var(--font-heading);
     font-size: 1.8rem;
@@ -312,6 +376,16 @@ body {
     color: var(--color-primary-accent); 
 }
 
+/* Focus visibility for keyboard users */
+:focus-visible {
+    outline: 2px solid var(--color-primary-accent);
+    outline-offset: 2px;
+}
+
+.indicator:focus-visible {
+    box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.4);
+}
+
 /* Icone de Usuário (Acessibilidade) */
 .user-icon {
     font-size: 1.5rem;
@@ -334,6 +408,9 @@ body {
 .user-icon:hover {
     color: var(--color-primary-accent);
 }
+
+/* Offset de âncora para não ficar escondido atrás do header fixo */
+#features, #pricing, #testimonials { scroll-margin-top: 90px; }
 
 /* ========================================================== */
 /* 4. HERO SECTION (O "Vidro Fosco" - O maior desafio) */
@@ -386,10 +463,10 @@ body {
 
 .hero-content h2 {
     /* CRÍTICO: Previne o "Layout Shift" durante o Typing Effect */
-    min-height: 200px; 
+    min-height: clamp(120px, 18vh, 200px);
 
     font-family: var(--font-heading);
-    font-size: 3.5rem; 
+    font-size: clamp(2.2rem, 6vw, 3.5rem); 
     line-height: 1.12;
     margin-bottom: 22px;
 }
@@ -516,7 +593,7 @@ body {
 
 .features-carousel h3 {
     font-family: var(--font-heading);
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     margin-bottom: 15px;
     background: linear-gradient(135deg, var(--color-light-text) 0%, var(--color-primary-accent) 100%);
     -webkit-background-clip: text;
@@ -642,7 +719,7 @@ body {
 /* Títulos e Textos */
 .features-carousel .feature-card h4 {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     margin-bottom: 15px;
     color: var(--color-light-text);
     font-weight: 600;
@@ -681,11 +758,36 @@ body {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 30px;
     flex-wrap: wrap; /* Permite quebra de linha se necessário */
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--color-light-text);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.control-btn:hover,
+.control-btn:focus-visible {
+    color: var(--color-primary-accent);
+    border-color: rgba(0, 188, 212, 0.4);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.25);
 }
 
 .indicator {
@@ -760,7 +862,7 @@ body {
 .section-header h3 {
     /* Reutiliza o estilo de título com gradiente da seção Features */
     font-family: var(--font-heading);
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     margin-bottom: 15px;
     background: linear-gradient(135deg, var(--color-light-text) 0%, var(--color-primary-accent) 100%);
     -webkit-background-clip: text;
@@ -939,6 +1041,12 @@ body {
     
     .testimonials-grid .testimonial-card {
         transform: translateY(0) !important;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 
+            0 10px 28px rgba(0, 0, 0, 0.35), 
+            0 0 18px rgba(0, 188, 212, 0.16),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
     .section-header h3 {
@@ -974,7 +1082,7 @@ body {
 
 .pricing h3 {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 3.2vw, 2.5rem);
     margin-bottom: 30px;
 }
 
@@ -1301,6 +1409,12 @@ input:checked + .slider:before {
         height: auto; 
         padding: 30px 20px; 
         border-radius: 20px;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 
+            0 6px 24px rgba(0, 0, 0, 0.22),
+            0 0 24px rgba(21, 214, 240, 0.12),
+            0 6px 28px rgba(0, 0, 0, 0.22);
     }
 
     .hero-content h2 {
@@ -1343,6 +1457,11 @@ input:checked + .slider:before {
         flex: 0 0 280px;
         padding: 30px 20px;
         margin: 0 5px;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow:
+            0 6px 22px rgba(0, 0, 0, 0.28),
+            0 0 0 1px rgba(255, 255, 255, 0.08);
     }
     
     .feature-icon {
@@ -1367,8 +1486,10 @@ input:checked + .slider:before {
     .carousel-indicators {
         gap: 6px;
         flex-wrap: wrap;
-        max-width: 600px;
     }
+
+    .carousel-controls { gap: 10px; }
+    .control-btn { width: 32px; height: 32px; }
     
     .indicator {
         width: 8px;

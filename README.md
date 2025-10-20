@@ -27,11 +27,11 @@ A professional, modern SaaS landing page template featuring glassmorphism design
 ```
 AI-CORE-Landing-Page/
 ├── index.html              # Main HTML file
+├── about.html              # About page (stub)
+├── contact.html            # Contact page (stub)
 ├── assets/
-│   ├── css/
-│   │   └── style.css       # Main stylesheet
-│   ├── js/
-│   │   └── main.js         # JavaScript functionality
+│   ├── style.css           # Main stylesheet
+│   ├── main.js             # JavaScript functionality
 │   └── images/
 │       ├── preview-image.jpg
 │       ├── favicon.ico
@@ -44,7 +44,7 @@ AI-CORE-Landing-Page/
 ## 🎨 Customization
 
 ### Colors
-Edit the CSS custom properties in `assets/css/style.css`:
+Edit the CSS custom properties in `assets/style.css`:
 
 ```css
 :root {
@@ -55,7 +55,7 @@ Edit the CSS custom properties in `assets/css/style.css`:
 ```
 
 ### Content
-- **Hero Section**: Edit the typing text in `assets/js/main.js`
+- **Hero Section**: Edit the typing text in `assets/main.js`
 - **Features**: Modify the feature cards in `index.html`
 - **Pricing**: Update prices and plans in the pricing section
 - **Company Info**: Change logo, contact info, and branding

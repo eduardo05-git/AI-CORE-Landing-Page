@@ -10,10 +10,7 @@ This guide will help you install and set up the AI-CORE Landing Page Template.
 3. Open `index.html` in your browser to preview
 
 ### Option 2: Git Clone
-```bash
-git clone https://github.com/yourusername/ai-core-landing-page.git
-cd ai-core-landing-page
-```
+Clone your fork or local repo and open the folder in your editor of choice.
 
 ## 🚀 Quick Start
 
@@ -22,16 +19,12 @@ cd ai-core-landing-page
    - Download from [nodejs.org](https://nodejs.org/)
    - Verify installation: `node --version`
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+2. Optional: install dev dependency for a simple local server
+   - Run: npm install
 
-3. **Start local server**
-   ```bash
-   npm start
-   ```
-   This will start a local server at `http://localhost:3000`
+3. Start local server
+   - Run: npm start
+   - This will start a local server at http://localhost:3000
 
 ### Manual Setup
 1. Open `index.html` directly in your browser
@@ -43,7 +36,7 @@ cd ai-core-landing-page
 ### 1. Basic Customization
 
 #### Change Colors
-Edit `assets/css/style.css`:
+Edit `assets/style.css`:
 ```css
 :root {
     --color-primary-accent: #your-color;    /* Main accent color */
@@ -52,7 +45,7 @@ Edit `assets/css/style.css`:
 ```
 
 #### Update Content
-- **Hero Text**: Edit `assets/js/main.js` line 7
+- **Hero Text**: Edit `assets/main.js` (look for startTypingEffect fullText)
 - **Features**: Modify feature cards in `index.html`
 - **Pricing**: Update prices and plans
 - **Company Info**: Change logo and contact details

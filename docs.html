@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-CORE Template Documentation</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .docs { padding: 80px 0; }
+    .docs .card { margin: 16px auto; max-width: 980px; }
+    .docs h2 { margin-bottom: 10px; }
+    .docs pre { background: rgba(255,255,255,0.06); padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .docs code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+  <header class="header visible">
+    <div class="container">
+      <h1 class="logo">AI-CORE</h1>
+      <nav class="nav">
+        <a href="index.html">Live Demo</a>
+        <a href="#installation">Install</a>
+        <a href="#customization">Customize</a>
+        <a href="#credits">Credits</a>
+      </nav>
+    </div>
+  </header>
+  <main class="docs" style="padding-top: 120px;">
+    <section class="features-carousel" id="installation" style="padding: 40px 0;">
+      <div class="container">
+        <h3>Installation</h3>
+        <div class="card">
+          <p>Option A: Open <code>index.html</code> directly in your browser.</p>
+          <p>Option B: Run a local server:</p>
+          <pre><code>npm install
+npm start  # http://localhost:3000</code></pre>
+        </div>
+      </div>
+    </section>
+    <section class="features-carousel" id="customization" style="padding: 40px 0;">
+      <div class="container">
+        <h3>Customization</h3>
+        <div class="card">
+          <h2>Colors</h2>
+          <pre><code>/* assets/style.css */
+:root {
+  --color-primary-accent: #00bcd4;
+  --color-dark-bg: #11141A;
+  --color-light-text: #F4F4F9;
+}</code></pre>
+          <h2>Hero typing text</h2>
+          <pre><code>// assets/main.js
+const fullText = "Transform Data Overload into Actionable Intelligence.";</code></pre>
+          <h2>Pricing</h2>
+          <p>Edit the cards in <code>index.html</code> under the <strong>pricing</strong> section.</p>
+        </div>
+      </div>
+    </section>
+    <section class="features-carousel" id="credits" style="padding: 40px 0;">
+      <div class="container">
+        <h3>Credits & Licenses</h3>
+        <div class="card">
+          <ul class="features-list">
+            <li>Google Fonts (Poppins, Roboto) — <a href="https://fonts.google.com/" target="_blank" rel="noopener">fonts.google.com</a></li>
+            <li>Font Awesome Free — <a href="https://fontawesome.com/" target="_blank" rel="noopener">fontawesome.com</a></li>
+          </ul>
+          <p>Replace demo images in <code>assets/images/</code> with your own licensed images.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 AI-CORE. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

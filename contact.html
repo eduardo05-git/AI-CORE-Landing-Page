@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | AI-CORE</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <meta name="description" content="Contact the AI-CORE template team for support and customization.">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="header visible">
+        <div class="container">
+            <h1 class="logo">AI-CORE</h1>
+            <nav class="nav">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="about.html">About</a>
+                <a href="index.html" class="btn-cta">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" style="padding-top: 120px;">
+        <section class="hero" style="height: auto; padding: 60px 20px;">
+            <div class="container" style="height: auto; padding: 40px 30px;">
+                <div class="hero-content">
+                    <h2>Get in touch</h2>
+                    <p>Have a question about the template or need customization? Send us a message.</p>
+                    <form class="subscribe-form" id="contact-form" action="#" method="POST" novalidate>
+                        <div class="form-group">
+                            <input type="email" id="contact-email" name="email" placeholder="Your email" aria-label="Email" required autocomplete="email">
+                            <div id="contact-email-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <button type="submit" class="btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AI-CORE. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="index.html#">Privacy Policy</a>
+                <a href="index.html#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/main.js"></script>
+    <script>
+        // lightweight reuse of validation
+        (function(){
+            const form = document.getElementById('contact-form');
+            const email = document.getElementById('contact-email');
+            const error = document.getElementById('contact-email-error');
+            if(!form||!email||!error) return;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            function validate(){
+                const v = email.value.trim();
+                if(!v){ error.textContent = 'Email is required'; error.classList.add('show'); email.setAttribute('aria-invalid','true'); return false; }
+                if(!emailRegex.test(v)){ error.textContent = 'Please enter a valid email address'; error.classList.add('show'); email.setAttribute('aria-invalid','true'); return false; }
+                error.classList.remove('show'); email.setAttribute('aria-invalid','false'); return true;
+            }
+            email.addEventListener('input', validate);
+            form.addEventListener('submit', function(e){ e.preventDefault(); if(validate()){ alert('Thanks! We will contact you soon.'); form.reset(); }});
+        })();
+    </script>
+</body>
+</html>

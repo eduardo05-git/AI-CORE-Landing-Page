@@ -87,6 +87,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         setTimeout(() => {
             header.classList.add('visible');
         }, 300); // 300ms de delay para suavidade
+
+        // Sticky on scroll: ativa após sair do topo do hero com threshold leve
+        const stickyThreshold = 30; // px
+        let lastIsSticky = false;
+        const onScroll = () => {
+            const isSticky = window.scrollY > stickyThreshold;
+            if (isSticky !== lastIsSticky) {
+                header.classList.toggle('sticky', isSticky);
+                lastIsSticky = isSticky;
+            }
+        };
+        // Respeita reduced motion? Apenas controla estado sem animações extras (CSS já trata)
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
     }
 
     // --- 1. FUNÇÃO: PROGRESSIVE LOADING ---
@@ -158,45 +172,91 @@ document.addEventListener('DOMContentLoaded', (event) => {
             emailInput.setAttribute('aria-invalid', 'false');
         }
 
-        function showSuccessMessage() {
+    function showSuccessMessage() {
     // Remove qualquer mensagem de sucesso anterior
     const existingSuccess = document.querySelector('.global-success-message');
     if (existingSuccess) {
         existingSuccess.remove();
     }
 
-    // Cria a mensagem de sucesso
+    // Cria a mensagem de sucesso (Versão Centralizada e com Efeito Pop/Glassmorphism)
     const successDiv = document.createElement('div');
-    successDiv.className = 'global-success-message';
+    successDiv.className = 'global-success-message glass-card-contact'; // Reutiliza o estilo Glass Card
+    successDiv.setAttribute('role', 'status');
+    successDiv.setAttribute('aria-live', 'polite');
+    successDiv.setAttribute('tabindex', '-1');
     successDiv.style.cssText = `
         position: fixed;
-        top: 73%;
+        top: 50%; /* CORREÇÃO: Centraliza verticalmente na viewport */
         left: 50%;
-        transform: translate(-50%, -50%);
-        background: var(--color-primary-accent); /* Usando a variável ciano */
-        color: var(--color-dark-bg);
-        padding: 20px 30px;
-        border-radius: 8px;
+        
+        /* Centraliza e inicia menor para o efeito 'pop' */
+        transform: translate(-50%, -50%) scale(0.9); 
+        opacity: 0;
+        
+        /* Estilos do Glass Card e Glow */
+        background: rgba(0, 188, 212, 0.1); /* Fundo ciano semi-transparente */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--color-primary-accent); /* Borda ciano sólida */
+        box-shadow: 0 0 30px rgba(0, 188, 212, 0.7); /* Glow forte */
+        
+        color: var(--color-light-text);
+        padding: 30px 40px;
+        border-radius: 18px;
         text-align: center;
         z-index: 10000;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         font-weight: 600;
+        /* Curva de transição personalizada para o efeito 'pop' */
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+        min-width: 300px;
+        max-width: 90vw;
     `;
     successDiv.innerHTML = `
-        <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
-        Thank you! Check your email for access instructions.
+        <i class="fas fa-check-circle" style="margin-right: 12px; font-size: 1.5rem; color: var(--color-primary-accent);"></i>
+        <span style="font-size: 1.1rem;">Inquiry Received!</span>
+        <p style="margin-top: 10px; font-weight: 400; font-size: 0.95rem;">Thank you, your message has been transmitted to AI-CORE servers. We will be in touch shortly.</p>
     `;
 
-    // ANEXA AO BODY, não ao formulário, para evitar o bug de layout
+    // ANEXA AO BODY
     document.body.appendChild(successDiv);
+    
+    // Força o repaint para garantir a transição de 'pop'
+    void successDiv.offsetWidth; 
 
-    // Reset form
-    document.getElementById('hero-email').value = '';
+    // ANIMAÇÃO DE ENTRADA (POP)
+    successDiv.style.opacity = '1';
+    successDiv.style.transform = 'translate(-50%, -50%) scale(1)';
+    // Foca a mensagem para leitores de tela
+    successDiv.focus({ preventScroll: true });
 
-    // Remove a mensagem após 5 segundos
-    setTimeout(() => {
-        successDiv.remove();
-    }, 5000);
+
+    // Reset form (limpa campos)
+    const emailField = document.getElementById('hero-email');
+    if (emailField) {
+        emailField.value = '';
+    }
+
+    // Função para remover mensagem (com foco de volta)
+    const removeSuccess = () => {
+        successDiv.style.opacity = '0';
+        successDiv.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        setTimeout(() => { successDiv.remove(); }, 500);
+        if (emailInput) {
+            emailInput.focus({ preventScroll: true });
+        }
+    };
+
+    // Fechar com ESC
+    successDiv.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            removeSuccess();
+        }
+    });
+
+    // Remove a mensagem após 6 segundos
+    setTimeout(removeSuccess, 6000);
 }
     }
 
@@ -226,19 +286,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // --- 5. FUNÇÃO: FEATURES CAROUSEL INFINITO (Indicadores Corrigidos) ---
     const carouselTrack = document.getElementById('carousel-track');
     const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-controls .prev');
+    const nextBtn = document.querySelector('.carousel-controls .next');
     
     if (carouselTrack && indicators.length > 0) {
         let currentSlide = 0;
         const totalSlides = 12; // Número total de features únicas
-        const slideWidth = 345; // Largura de cada card (320px) + gap (25px)
+        let slideWidth = 345; // será recalculado dinamicamente
         let isHovered = false;
         let isManuallyControlled = false;
         let autoPlayInterval;
+
+        // Recalcula largura do slide com base no primeiro card + gap
+        function recalcSlideWidth() {
+            const firstCard = carouselTrack.querySelector('.feature-card');
+            if (!firstCard) return;
+            const cardRect = firstCard.getBoundingClientRect();
+            // gap estimado a partir do CSS (pegando computed style) ou fallback
+            const styles = window.getComputedStyle(carouselTrack);
+            const gap = parseFloat(styles.columnGap || styles.gap || '25');
+            slideWidth = Math.round(cardRect.width + gap);
+        }
+        recalcSlideWidth();
         
-        // Função para atualizar indicadores
+        // Função para atualizar indicadores (classe e ARIA)
         function updateIndicators() {
             indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentSlide);
+                const isActive = index === currentSlide;
+                indicator.classList.toggle('active', isActive);
+                indicator.setAttribute('aria-current', isActive ? 'true' : 'false');
             });
         }
         
@@ -262,6 +338,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     startAutoPlay();
                 }
             }, 8000);
+        }
+
+        // Prev/Next handlers
+        function goPrev() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            moveToSlide(currentSlide);
+        }
+        function goNext() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            moveToSlide(currentSlide);
         }
         
         // Função para pausar animação automática
@@ -297,17 +383,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Event listeners para hover
         carouselTrack.addEventListener('mouseenter', pauseAnimation);
         carouselTrack.addEventListener('mouseleave', resumeAnimation);
+
+        // Controles Prev/Next (se existirem)
+        if (prevBtn) {
+            prevBtn.addEventListener('click', goPrev);
+            prevBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goPrev(); }
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', goNext);
+            nextBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goNext(); }
+            });
+        }
         
-        // Event listeners para indicadores
+        // Event listeners para indicadores (mouse e teclado)
         indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
+            const activate = () => {
                 isManuallyControlled = true;
                 moveToSlide(index);
-                
                 // Permite que o auto-play retome após 15 segundos
-                setTimeout(() => {
-                    isManuallyControlled = false;
-                }, 15000);
+                setTimeout(() => { isManuallyControlled = false; }, 15000);
+            };
+            indicator.addEventListener('click', activate);
+            indicator.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    activate();
+                }
             });
         });
         
@@ -365,11 +469,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Adiciona suporte para navegação por teclado
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                moveToSlide(currentSlide);
+                goPrev();
             } else if (e.key === 'ArrowRight') {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                moveToSlide(currentSlide);
+                goNext();
+            }
+        });
+
+        // Recalcula em resize e mantém alinhamento
+        window.addEventListener('resize', () => {
+            const previousWidth = slideWidth;
+            recalcSlideWidth();
+            if (slideWidth !== previousWidth) {
+                // reposiciona o track para o slide atual com a nova largura
+                const translateX = -(currentSlide * slideWidth);
+                carouselTrack.style.transform = `translateX(${translateX}px)`;
             }
         });
     }
@@ -390,9 +503,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // 2. Usa o scrollIntoView com a opção 'smooth'
+                // 2. Respeita prefers-reduced-motion
+                const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 targetElement.scrollIntoView({
-                    behavior: 'smooth',
+                    behavior: prefersReduced ? 'auto' : 'smooth',
                     block: 'start' // Alinha o topo da seção ao topo da viewport
                 });
 

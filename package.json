@@ -28,10 +28,7 @@
     "url": "https://github.com/yourusername/ai-core-landing-page/issues"
   },
   "homepage": "https://yourusername.github.io/ai-core-landing-page",
-  "dependencies": {
-    "animejs": "^4.2.2",
-    "aos": "^2.3.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "http-server": "^14.1.1"
   },
