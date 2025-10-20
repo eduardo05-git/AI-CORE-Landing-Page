@@ -36,7 +36,7 @@ Clone your fork or local repo and open the folder in your editor of choice.
 ### 1. Basic Customization
 
 #### Change Colors
-Edit `assets/style.css`:
+Edit `assets/style.css` (then minify for production):
 ```css
 :root {
     --color-primary-accent: #your-color;    /* Main accent color */
@@ -44,39 +44,80 @@ Edit `assets/style.css`:
 }
 ```
 
+After editing, minify:
+```bash
+npx clean-css-cli assets/style.css -o assets/style.min.css
+```
+
 #### Update Content
-- **Hero Text**: Edit `assets/main.js` (look for startTypingEffect fullText)
+- **Hero Text**: Edit `assets/main.js` (line ~400, look for startTypingEffect fullText)
 - **Features**: Modify feature cards in `index.html`
 - **Pricing**: Update prices and plans
 - **Company Info**: Change logo and contact details
+- **Integration Logos**: Replace SVG files in `assets/images/`
 
-#### Replace Images
-- `assets/images/preview-image.jpg` - Main preview (1200x630px)
-- `assets/images/favicon.ico` - Browser icon (32x32px)
-- `assets/images/apple-touch-icon.png` - iOS icon (180x180px)
+After editing JavaScript, minify:
+```bash
+npx terser assets/main.js -o assets/main.min.js --compress --mangle
+```
+
+#### Replace/Add Images
+**Required (see IMAGES-NEEDED.md for details)**:
+- `assets/images/favicon.ico` - Browser icon (16x16, 32x32, 48x48px) ⚠️
+- `assets/images/apple-touch-icon.png` - iOS icon (180x180px) ⚠️
+
+**Already included**:
+- `assets/images/previews/` - 5 auto-generated preview images ✅
+- `assets/images/*.svg` - 6 integration partner logos ✅
 
 ### 2. Advanced Customization
 
 #### Add New Sections
-1. Create HTML structure in `index.html`
-2. Add corresponding CSS in `assets/css/style.css`
-3. Add JavaScript functionality in `assets/js/main.js`
+1. Create HTML structure in `index.html` (or other pages)
+2. Add corresponding CSS in `assets/style.css`
+3. Add JavaScript functionality in `assets/main.js`
+4. Minify both files before deployment
 
 #### Modify Animations
-Edit animation properties in `assets/css/style.css`:
+Edit animation properties in `assets/style.css`:
 ```css
 .hidden-element {
     transition: opacity 3s cubic-bezier(0.2, 1, 0.3, 1);
 }
 ```
 
+Then minify the CSS for production.
+
 #### Customize Typography
-Update Google Fonts import in `index.html`:
+Update Google Fonts import in `index.html` (and all other HTML pages):
 ```html
 <link href="https://fonts.googleapis.com/css2?family=YourFont:wght@400;700&display=swap" rel="stylesheet">
 ```
 
+#### Generate Preview Images
+Regenerate preview images if you make design changes:
+```bash
+# Install dependencies first
+npm install
+
+# Generate screenshots (requires Node.js and Puppeteer)
+node tools/generate-previews.mjs
+
+# Create main collage (Windows PowerShell)
+.\tools\create-main-preview.ps1
+```
+
 ## 🌐 Deployment
+
+### Pre-Deployment Checklist
+Before deploying, ensure:
+- ✅ All HTML pages use minified assets (`.min.css` and `.min.js`)
+- ✅ Favicon and apple-touch-icon added (see `IMAGES-NEEDED.md`)
+- ✅ Privacy policy and terms updated with your actual content
+- ✅ Contact emails changed from placeholders
+- ✅ No console errors when testing locally
+- ✅ All forms tested and working
+- ✅ Mobile responsiveness verified
 
 ### Static Hosting (Recommended)
 

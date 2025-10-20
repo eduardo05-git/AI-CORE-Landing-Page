@@ -2,6 +2,34 @@
 
 This document outlines the design system, color palette, typography, and component guidelines for the AI-CORE Landing Page Template.
 
+---
+
+## 📦 New Features (Latest Version)
+
+### Dark/Light Mode Toggle
+- Smooth animated transition with overlay effect
+- Theme preference saved in localStorage
+- Theme toggle button in navbar with icon change
+
+### Plan Comparison Table
+- Interactive checkmarks with hover effects
+- Glassmorphism styling
+- Responsive horizontal scroll on mobile
+- Animated state changes
+
+### Integrations Section
+- 6 partner logos (Zapier, Slack, Google Sheets, Salesforce, HubSpot, Microsoft Teams)
+- SVG format for crisp display
+- Hover animations with scale and rotation
+- Flexible grid layout
+
+### Particles.js Background
+- Animated particle effects on hero section
+- Performance-optimized
+- Responsive and adapts to theme
+
+---
+
 ## 🎨 Color Palette
 
 ### Primary Colors
@@ -236,19 +264,41 @@ box-shadow:
 
 ## 🔧 Customization
 
+### File Locations
+- **CSS**: `assets/style.css` (development), `assets/style.min.css` (production)
+- **JavaScript**: `assets/main.js` (development), `assets/main.min.js` (production)
+- **Images**: `assets/images/` (logos, icons, previews)
+
 ### Easy Customizations
-1. **Colors**: Change CSS custom properties
-2. **Fonts**: Update Google Fonts imports
-3. **Content**: Edit HTML text content
-4. **Images**: Replace placeholder images
+1. **Colors**: Change CSS custom properties in `assets/style.css`
+2. **Fonts**: Update Google Fonts imports in HTML files
+3. **Content**: Edit HTML text content in each page
+4. **Images**: Replace SVG logos and add favicon
 
 ### Advanced Customizations
 1. **Layout**: Modify CSS Grid properties
-2. **Animations**: Adjust transition timings
-3. **Effects**: Customize glassmorphism properties
-4. **JavaScript**: Add new interactive features
+2. **Animations**: Adjust transition timings and effects
+3. **Effects**: Customize glassmorphism and particles.js
+4. **JavaScript**: Add new interactive features in `assets/main.js`
+
+### After Customization
+Always minify files before deployment:
+```bash
+# Minify CSS
+npx clean-css-cli assets/style.css -o assets/style.min.css
+
+# Minify JavaScript
+npx terser assets/main.js -o assets/main.min.js --compress --mangle
+```
 
 ## 📊 Performance Considerations
+
+### Current Optimizations
+- ✅ Minified CSS and JavaScript (used in all 7 HTML pages)
+- ✅ Optimized preview images
+- ✅ Lazy loading for progressive enhancement
+- ✅ Efficient CSS selectors
+- ✅ Particles.js performance mode
 
 ### Optimization Tips
 - Use CSS custom properties for theming
@@ -259,9 +309,21 @@ box-shadow:
 
 ### Loading Strategy
 - Progressive enhancement
-- Critical CSS inlined
-- Non-critical CSS loaded asynchronously
+- Critical CSS inlined where needed
+- Non-critical assets loaded asynchronously
 - Images lazy-loaded where appropriate
+- Preload hints for fonts and critical resources
+
+---
+
+## 📝 Documentation Reference
+
+For more information, see:
+- **README.md** - Overview and quick start
+- **INSTALLATION.md** - Detailed setup and deployment
+- **IMAGES-NEEDED.md** - Required image assets
+- **QA-REPORT.md** - Quality assurance and testing
+- **CHANGELOG.md** - Version history
 
 ---
 

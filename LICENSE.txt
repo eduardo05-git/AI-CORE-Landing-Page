@@ -1,0 +1,21 @@
+AI-CORE Landing Page Template — License Information
+
+This item is sold and licensed exclusively via ThemeForest (Envato Market).
+
+By using this template, you agree to the terms of the Envato Market License applicable to your purchase:
+- Regular License: https://themeforest.net/licenses/terms/regular
+- Extended License: https://themeforest.net/licenses/terms/extended
+- License FAQs: https://themeforest.net/licenses/faq
+
+Key points (summary, not a substitute for the full license):
+- You may use the template in a single end product per license.
+- You may modify the item to suit your needs.
+- You may not redistribute, resell, share, or make the item available as-is or modified, except as part of your end product in accordance with the license terms.
+- For multi-use or redistribution permission, an Extended License is required.
+
+Third‑party resources included/used:
+- Google Fonts (Poppins, Roboto) — SIL Open Font License: https://scripts.sil.org/OFL
+- Font Awesome Free — CC BY 4.0 / MIT: https://fontawesome.com/license/free
+- Any brand logos used in the demo (e.g., Slack, Zapier) are for demonstration purposes only. Replace with your own assets for production use.
+
+Copyright © 2025 AI-CORE. All rights reserved.

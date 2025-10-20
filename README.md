@@ -1,19 +1,23 @@
 # AI-CORE | Minimalist SaaS Landing Page Template
 
-![AI-CORE Preview](assets/images/preview-image.jpg)
+![AI-CORE Preview](assets/images/previews/ai-core-main-preview-1200x630.png)
 
 A professional, modern SaaS landing page template featuring glassmorphism design, smooth animations, and conversion-optimized layout. Perfect for AI startups, tech companies, and SaaS businesses.
 
 ## ✨ Features
 
 - **Modern Glassmorphism Design** - Beautiful frosted glass effect with neon borders
+- **Dark/Light Mode Toggle** - Smooth animated theme switching
+- **Plan Comparison Table** - Interactive feature comparison with animated checkmarks
+- **Integrations Showcase** - 6 animated partner logos (Zapier, Slack, Google Sheets, etc.)
 - **Fully Responsive** - Optimized for all devices and screen sizes
-- **Smooth Animations** - Progressive loading, typing effects, and hover animations
+- **Smooth Animations** - Progressive loading, typing effects, particles.js background, and hover animations
 - **Conversion Optimized** - Strategic CTA placement and form validation
 - **SEO Ready** - Complete meta tags, semantic HTML, and accessibility features
 - **Clean Code** - Well-organized, commented, and easy to customize
 - **Modern CSS** - CSS Grid, Flexbox, and custom properties
 - **Interactive Elements** - Price toggle, form validation, and micro-interactions
+- **7 Complete Pages** - index, about, contact, docs, privacy, terms, 404
 
 ## 🚀 Quick Start
 
@@ -26,25 +30,45 @@ A professional, modern SaaS landing page template featuring glassmorphism design
 
 ```
 AI-CORE-Landing-Page/
-├── index.html              # Main HTML file
-├── about.html              # About page (stub)
-├── contact.html            # Contact page (stub)
+├── index.html              # Main landing page
+├── about.html              # About page
+├── contact.html            # Contact page with form
+├── docs.html               # Documentation page
+├── privacy.html            # Privacy policy page
+├── terms.html              # Terms of service page
+├── 404.html                # 404 error page
 ├── assets/
-│   ├── style.css           # Main stylesheet
-│   ├── main.js             # JavaScript functionality
+│   ├── style.css           # Main stylesheet (development)
+│   ├── style.min.css       # Minified stylesheet (production) ✅
+│   ├── main.js             # JavaScript functionality (development)
+│   ├── main.min.js         # Minified JavaScript (production) ✅
 │   └── images/
-│       ├── preview-image.jpg
-│       ├── favicon.ico
-│       └── apple-touch-icon.png
+│       ├── previews/       # Generated preview images
+│       │   ├── ai-core-og-1200x630.png
+│       │   ├── ai-core-main-preview-1200x630.png
+│       │   ├── ai-core-desktop-1920x1080.png
+│       │   ├── ai-core-tablet-768x1024.png
+│       │   └── ai-core-mobile-375x667.png
+│       ├── *.svg           # Integration partner logos
+│       ├── favicon.ico     # ⚠️ ADD THIS (see IMAGES-NEEDED.md)
+│       └── apple-touch-icon.png  # ⚠️ ADD THIS (see IMAGES-NEEDED.md)
+├── tools/
+│   ├── generate-previews.mjs      # Node.js preview generator
+│   └── create-main-preview.ps1    # PowerShell collage script
 ├── README.md               # This file
+├── INSTALLATION.md         # Detailed setup guide
+├── STYLE-GUIDE.md          # Design system documentation
+├── IMAGES-NEEDED.md        # Guide for missing images ⚠️
+├── QA-REPORT.md            # Quality assurance report
 ├── CHANGELOG.md            # Version history
-└── package.json            # Dependencies
+├── LICENSE.txt             # License information
+└── package.json            # Node.js dependencies
 ```
 
 ## 🎨 Customization
 
 ### Colors
-Edit the CSS custom properties in `assets/style.css`:
+Edit the CSS custom properties in `assets/style.css` (or `style.min.css` after minifying):
 
 ```css
 :root {
@@ -55,23 +79,42 @@ Edit the CSS custom properties in `assets/style.css`:
 ```
 
 ### Content
-- **Hero Section**: Edit the typing text in `assets/main.js`
+- **Hero Section**: Edit the typing text in `assets/main.js` (line ~400)
 - **Features**: Modify the feature cards in `index.html`
 - **Pricing**: Update prices and plans in the pricing section
 - **Company Info**: Change logo, contact info, and branding
+- **Integration Logos**: Replace SVG files in `assets/images/`
 
 ### Images
-Replace placeholder images in `assets/images/`:
-- `preview-image.jpg` - Main preview image (1200x630px)
-- `favicon.ico` - Browser favicon (32x32px)
-- `apple-touch-icon.png` - iOS icon (180x180px)
+**Required** - Add these before going live (see `IMAGES-NEEDED.md`):
+- `assets/images/favicon.ico` - Browser favicon (16x16, 32x32, 48x48px)
+- `assets/images/apple-touch-icon.png` - iOS icon (180x180px)
+
+**Already included**:
+- Preview images in `assets/images/previews/` (auto-generated)
+- Integration logos: 6 SVG files (Zapier, Slack, Google Sheets, Salesforce, HubSpot, Teams)
 
 ## 🔧 Technical Details
 
 ### Dependencies
 - **Fonts**: Google Fonts (Poppins, Roboto)
 - **Icons**: Font Awesome 6.0
+- **Animations**: Particles.js (background effects)
 - **No jQuery**: Pure vanilla JavaScript
+
+### Production Files
+All HTML pages use **minified assets** for optimal performance:
+- `assets/style.min.css` - Minified CSS (used in all 7 pages)
+- `assets/main.min.js` - Minified JavaScript (used in all 7 pages)
+
+To regenerate minified files after editing:
+```bash
+# CSS minification
+npx clean-css-cli assets/style.css -o assets/style.min.css
+
+# JS minification
+npx terser assets/main.js -o assets/main.min.js --compress --mangle
+```
 
 ### Browser Support
 - Chrome 60+
@@ -80,10 +123,11 @@ Replace placeholder images in `assets/images/`:
 - Edge 79+
 
 ### Performance
-- Optimized CSS and JavaScript
-- Compressed images
-- Minimal external dependencies
-- Fast loading times
+- ✅ Minified CSS and JavaScript
+- ✅ Optimized preview images (5 generated)
+- ✅ Minimal external dependencies
+- ✅ Lazy loading and progressive enhancement
+- ✅ Fast loading times
 
 ## 📱 Responsive Breakpoints
 
@@ -94,9 +138,8 @@ Replace placeholder images in `assets/images/`:
 ## 🎯 SEO Features
 
 - Semantic HTML structure
-- Complete meta tags
-- Open Graph tags
-- Twitter Card tags
+- Complete meta tags (Open Graph, Twitter Card)
+- Preview images for social sharing
 - Schema.org markup ready
 - Optimized heading hierarchy
 

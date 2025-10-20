@@ -22,7 +22,7 @@
     <meta property="og:description" content="Professional AI-powered SaaS landing page template with modern design and conversion optimization.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-demo-url.example.com/">
-    <meta property="og:image" content="assets/images/preview-image.jpg">
+    <meta property="og:image" content="assets/images/previews/ai-core-og-1200x630.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="AI-CORE SaaS template preview">
@@ -31,12 +31,24 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI-CORE | Minimalist SaaS Landing Page Template">
     <meta name="twitter:description" content="Professional AI-powered SaaS landing page template with modern design.">
-    <meta name="twitter:image" content="assets/images/preview-image.jpg">
+    <meta name="twitter:image" content="assets/images/previews/ai-core-og-1200x630.png">
     <meta name="twitter:image:alt" content="AI-CORE SaaS template preview">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Preload Google Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap">
+    </noscript>
+
+    <!-- Preload Font Awesome -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </noscript>
 
     <!-- Importação de Fontes Premium (Poppins para Títulos, Roboto para Corpo) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -44,8 +56,8 @@
     <!-- Importação de Ícones (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <!-- Link para o CSS principal (assets/style.css) -->
-    <link rel="stylesheet" href="assets/style.css">
+    <!-- Link para o CSS principal (MINIFIED for production) -->
+    <link rel="stylesheet" href="assets/style.min.css">
 </head>
 <body>
 
@@ -70,6 +82,11 @@
             <div class="shadow"></div>
             <div class="shadow"></div>
         </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="scroll-progress-bar"></div>
     </div>
 
     <!-- ========================================================================= -->
@@ -100,7 +117,7 @@
                     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
                         <i class="fas fa-sun"></i>
                     </button>
-                    <a href="#" class="user-icon" aria-label="User Account"><i class="fa-regular fa-user"></i></a>
+                    <i class="fas fa-user user-icon" aria-label="User profile"></i>
                 </div>
             </nav>
         </div>
@@ -111,14 +128,17 @@
         <!-- HERO SECTION: O bloco central de "Vidro Fosco" - Alta Conversão -->
         <!-- O efeito de Glass Card é definido no CSS: .hero .container -->
         <!-- ========================================================================= -->
-        <section id="hero" class="hero">
+        <section id="hero" class="hero hero-v1" data-variant="v1">
+            <!-- Particles.js Background Container -->
+            <div id="particles-js" class="particles-container"></div>
+            
             <div class="container">
                 <!-- CRÍTICO: O elemento que contém o LED Rotacional (para a animação CSS) -->
                 <div class="rotating-border-pole"></div> 
 
                 <div class="hero-content">
                     <!-- H2: Target do JavaScript para o efeito Typing Effect (Máquina de Escrever) -->
-                    <h2><span id="typing-text" class="typing-effect"></span></h2>
+                    <h2><span id="typing-text" class="typing-effect typing-target"></span></h2>
 
                     <!-- Subtítulo: Fica estático para dar contexto imediato -->
                     <p>Dive into the art assets, where innovative blockchain technology meets financial expertise.</p>
@@ -143,6 +163,111 @@
                         </button>
                         <div id="submit-description" class="sr-only">Submit your email to get instant access to AI-CORE platform</div>
                     </form>
+                </div>
+            </div>
+        </section>
+        <!-- ========================================================================= -->
+        <!-- INTEGRATIONS SECTION: Logos animados, microinterações, tooltips -->
+        <!-- ========================================================================= -->
+        <section id="integrations" class="integrations-section hidden-element">
+            <div class="container">
+                <h3>Seamless Integrations</h3>
+                <p class="integrations-subtitle">Connect AI-CORE with your favorite tools</p>
+                <div class="integrations-logos">
+                    <div class="integration-logo" tabindex="0" title="Zapier">
+                        <img src="assets/images/zapier-logo.svg" alt="Zapier logo">
+                    </div>
+                    <div class="integration-logo" tabindex="0" title="Slack">
+                        <img src="assets/images/slack-logo.svg" alt="Slack logo">
+                    </div>
+                    <div class="integration-logo" tabindex="0" title="Google Sheets">
+                        <img src="assets/images/google-sheets-logo.svg" alt="Google Sheets logo">
+                    </div>
+                    <div class="integration-logo" tabindex="0" title="Salesforce">
+                        <img src="assets/images/salesforce-logo.svg" alt="Salesforce logo">
+                    </div>
+                    <div class="integration-logo" tabindex="0" title="HubSpot">
+                        <img src="assets/images/hubspot-logo.svg" alt="HubSpot logo">
+                    </div>
+                    <div class="integration-logo" tabindex="0" title="Microsoft Teams">
+                        <img src="assets/images/teams-logo.svg" alt="Microsoft Teams logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+
+        <!-- ========================================================================= -->
+        <!-- HERO VARIANT v2: Split Layout (Texto + Mockup) -->
+        <!-- ========================================================================= -->
+        <section class="hero hero-v2" data-variant="v2" hidden>
+            <div class="container">
+                <div class="hero-split">
+                    <div class="hero-left">
+                        <h2>
+                            <span class="typing-target">Scale AI Insights Across Your Business</span>
+                        </h2>
+                        <p>Plug-and-play analytics with enterprise-grade security and blazing-fast performance.</p>
+                        <div class="cta-buttons">
+                            <a href="#pricing" class="btn-cta">View Pricing</a>
+                            <a href="docs.html" class="btn-primary" style="margin-left: 12px;">Read Docs</a>
+                        </div>
+                    </div>
+                    <div class="hero-right">
+                        <div class="mockup-box" aria-hidden="true">
+                            <div class="mockup-header"></div>
+                            <div class="mockup-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- HERO VARIANT v3: Minimalist Centered (Motion Gradient) -->
+        <!-- ========================================================================= -->
+        <section class="hero hero-v3" data-variant="v3" hidden>
+            <div class="container">
+                <div class="hero-content">
+                    <h2>
+                        <span class="typing-target">From Data Noise to Clear Decisions</span>
+                    </h2>
+                    <p>Clean, focused, and optimized for conversions — built with accessibility and performance in mind.</p>
+                    <div class="cta-buttons">
+                        <a href="#features" class="btn-cta">Explore Features</a>
+                        <a href="contact.html" class="btn-primary" style="margin-left: 12px;">Talk to Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- STATS SECTION: Animated Counter Statistics -->
+        <!-- ========================================================================= -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-icon"></i>
+                        <div class="stat-number" data-target="50000" data-format="kplus">0</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-globe stat-icon"></i>
+                        <div class="stat-number" data-target="120" data-format="plus">0</div>
+                        <div class="stat-label">Countries Served</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shield-alt stat-icon"></i>
+                        <div class="stat-number" data-target="99.9" data-format="percent">0</div>
+                        <div class="stat-label">Uptime %</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-award stat-icon"></i>
+                        <div class="stat-number" data-target="15" data-format="plus">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -542,6 +667,24 @@
                     </div>
 
                 </div>
+                
+                <!-- Testimonial Navigation -->
+                <div class="testimonial-nav">
+                    <button class="testimonial-btn prev" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-indicators" role="tablist" aria-label="Testimonial navigation">
+                        <button class="indicator" role="tab" aria-selected="true" aria-label="Testimonial 1"></button>
+                        <button class="indicator" role="tab" aria-selected="false" aria-label="Testimonial 2"></button>
+                        <button class="indicator" role="tab" aria-selected="false" aria-label="Testimonial 3"></button>
+                        <button class="indicator" role="tab" aria-selected="false" aria-label="Testimonial 4"></button>
+                        <button class="indicator" role="tab" aria-selected="false" aria-label="Testimonial 5"></button>
+                        <button class="indicator" role="tab" aria-selected="false" aria-label="Testimonial 6"></button>
+                    </div>
+                    <button class="testimonial-btn next" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </section>
         <!-- ========================================================================= -->
@@ -557,7 +700,10 @@
                         <input type="checkbox" id="pricing-switch" aria-label="Toggle billing period">
                         <span class="slider" aria-hidden="true"></span>
                     </label>
-                    <span class="toggle-label annually" id="label-annually">Annually</span>
+                    <span class="toggle-label annually" id="label-annually">
+                        Annually
+                        <span class="save-badge" aria-label="Save 20 percent">Save 20%</span>
+                    </span>
                 </div>
 
                 <!-- Container para o switch de preços Mensal/Anual (Botões) -->
@@ -607,7 +753,58 @@
                 </div>
             </div>
         </section>
-
+        <!-- ========================================================================= -->
+        <!-- PLAN COMPARISON TABLE: Interativa, responsiva, glassmorphism, ticks animados -->
+        <!-- ========================================================================= -->
+        <section id="plan-comparison" class="plan-comparison-section hidden-element">
+            <div class="container">
+                <h3>Compare All Plans</h3>
+                <div class="plan-comparison-table-wrapper">
+                    <table class="plan-comparison-table" role="table" aria-label="Plan Feature Comparison">
+                        <thead>
+                            <tr>
+                                <th scope="col">Features</th>
+                                <th scope="col">Basic</th>
+                                <th scope="col">Pro</th>
+                                <th scope="col">Enterprise</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Data Queries</th>
+                                <td>5,000</td>
+                                <td>Unlimited</td>
+                                <td>Unlimited</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Predictive Reports</th>
+                                <td><span class="tick disabled" title="Not included"><i class="fas fa-times"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Priority Support</th>
+                                <td><span class="tick disabled" title="Not included"><i class="fas fa-times"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Multi-User Access</th>
+                                <td><span class="tick disabled" title="Not included"><i class="fas fa-times"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dedicated AI Model</th>
+                                <td><span class="tick disabled" title="Not included"><i class="fas fa-times"></i></span></td>
+                                <td><span class="tick disabled" title="Not included"><i class="fas fa-times"></i></span></td>
+                                <td><span class="tick"><i class="fas fa-check"></i></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
         <!-- ========================================================================= -->
         <!-- FAQ: Frequently Asked Questions (Accordion Style) -->
         <!-- ========================================================================= -->
@@ -702,11 +899,49 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="faq-cta">
-                    <p>Still have questions?</p>
-                    <a href="contact.html" class="btn-primary">Contact Support</a>
+                    <!-- FAQ Item Especial - Still have questions? -->
+                    <div class="faq-item faq-item-cta">
+                        <div class="faq-question-cta">
+                            <span class="question-text">Still have questions?</span>
+                            <a href="contact.html" class="btn-primary btn-faq-cta">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- NEWSLETTER SECTION: Functional Newsletter Subscription -->
+        <!-- ========================================================================= -->
+        <section class="newsletter-section hidden-element improved-newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h3>Stay Ahead of the AI Curve</h3>
+                        <p>Get weekly insights, product updates, and exclusive tips delivered to your inbox.</p>
+                    </div>
+                    <form class="newsletter-form" id="newsletter-form" novalidate>
+                        <div class="form-group-inline">
+                            <input 
+                                type="email" 
+                                id="newsletter-email" 
+                                name="email" 
+                                placeholder="Enter your email" 
+                                aria-label="Newsletter Email" 
+                                required
+                                autocomplete="email"
+                            >
+                            <button type="submit" class="btn-newsletter" aria-label="Subscribe to newsletter">
+                                <span class="btn-text">Subscribe</span>
+                                <span class="btn-loader" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="newsletter-error" role="alert" aria-live="polite"></div>
+                        <p class="newsletter-privacy">We respect your privacy. Unsubscribe anytime.</p>
+                    </form>
                 </div>
             </div>
         </section>
@@ -721,6 +956,8 @@
             <div class="footer-links">
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
     </footer>
@@ -733,6 +970,37 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Script Principal - Contém Progressive Loading, Typing Effect e Pricing Switch (main.js) -->
-    <script src="assets/main.js"></script>
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-consent" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description">
+        <div class="cookie-content">
+            <div class="cookie-icon">
+                <i class="fas fa-cookie-bite"></i>
+            </div>
+            <div class="cookie-text">
+                <h3 id="cookie-title">We Value Your Privacy</h3>
+                <p id="cookie-description">
+                    We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. 
+                    By clicking "Accept All", you consent to our use of cookies. 
+                    <a href="privacy.html" class="cookie-link">Learn more</a>
+                </p>
+            </div>
+            <div class="cookie-actions">
+                <button id="cookie-accept-all" class="btn-cookie accept-all">
+                    <i class="fas fa-check"></i> Accept All
+                </button>
+                <button id="cookie-accept-essential" class="btn-cookie essential">
+                    Essential Only
+                </button>
+                <button id="cookie-settings" class="btn-cookie settings" aria-label="Cookie settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles.js Library (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Script Principal - Contém Progressive Loading, Typing Effect e Pricing Switch (MINIFIED for production) -->
+    <script src="assets/main.min.js"></script>
 </body>
