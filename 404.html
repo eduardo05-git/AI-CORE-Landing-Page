@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | AI-CORE</title>
+    <meta name="description" content="The page you are looking for could not be found.">
+    
+    <!-- Preconnect para Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Importação de Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-page::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 188, 212, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .error-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: clamp(8rem, 20vw, 15rem);
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, #fff 0%, rgba(0, 188, 212, 0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            position: relative;
+            animation: glitch 3s ease-in-out infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: none; }
+            25% { text-shadow: 3px 3px 0 rgba(0, 188, 212, 0.5), -3px -3px 0 rgba(255, 0, 255, 0.5); }
+            50% { text-shadow: -3px -3px 0 rgba(0, 188, 212, 0.5), 3px 3px 0 rgba(255, 0, 255, 0.5); }
+            75% { text-shadow: 3px -3px 0 rgba(0, 188, 212, 0.5), -3px 3px 0 rgba(255, 0, 255, 0.5); }
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: var(--color-primary-accent);
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 30px rgba(0, 188, 212, 0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .error-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-light-text);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--color-secondary-text);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-suggestions {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .error-suggestions h3 {
+            color: var(--color-light-text);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .error-suggestions ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .error-suggestions li {
+            padding: 10px 0;
+            color: var(--color-secondary-text);
+        }
+
+        .error-suggestions li a {
+            color: var(--color-primary-accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .error-suggestions li a:hover {
+            color: #31def7;
+            text-decoration: underline;
+        }
+
+        .error-suggestions li::before {
+            content: '→';
+            margin-right: 10px;
+            color: var(--color-primary-accent);
+        }
+
+        @media (max-width: 768px) {
+            .error-page {
+                padding: 60px 20px;
+            }
+
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-icon {
+                font-size: 3rem;
+            }
+
+            .error-title {
+                font-size: 1.8rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .error-suggestions {
+                padding: 20px;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    
+    <header class="header visible">
+        <div class="container">
+            <h1 class="logo">AI-CORE</h1>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#features">Features</a>
+                    <a href="index.html#pricing">Pricing</a>
+                    <a href="index.html#faq">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <i class="fas fa-user user-icon" aria-label="User profile"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="error-page">
+        <div class="error-content">
+            <i class="fas fa-satellite-dish error-icon"></i>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">
+                Oops! The page you're looking for seems to have disappeared into the digital void. 
+                Don't worry, even AI makes mistakes sometimes.
+            </p>
+
+            <div class="error-actions">
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="javascript:history.back()" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </a>
+                <a href="contact.html" class="btn-secondary">
+                    <i class="fas fa-life-ring"></i> Get Help
+                </a>
+            </div>
+
+            <div class="error-suggestions">
+                <h3>You might be looking for:</h3>
+                <ul>
+                    <li><a href="index.html#features">Explore Our Features</a></li>
+                    <li><a href="index.html#pricing">View Pricing Plans</a></li>
+                    <li><a href="index.html#faq">Read the FAQ</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="docs.html">View Documentation</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="assets/main.js"></script>
+</body>
+</html>

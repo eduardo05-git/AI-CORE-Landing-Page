@@ -3,31 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | AI-CORE</title>
+    <title>About AI-CORE | Modern SaaS Landing Page</title>
+    <meta name="description" content="Learn about AI-CORE - A modern, minimalist SaaS landing page template featuring glassmorphism, smooth animations, and conversion-focused UI.">
+    
+    <!-- Preconnect para Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Importação de Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS Principal -->
     <link rel="stylesheet" href="assets/style.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <meta name="description" content="About AI-CORE template. Learn about features, design system, and support.">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    
     <header class="header visible">
         <div class="container">
             <h1 class="logo">AI-CORE</h1>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
             <nav class="nav">
-                <a href="index.html#features">Features</a>
-                <a href="index.html#pricing">Pricing</a>
-                <a href="contact.html">Contact</a>
-                <a href="index.html" class="btn-cta">Back to Home</a>
+                <div class="nav-links">
+                    <a href="index.html#features">Features</a>
+                    <a href="index.html#pricing">Pricing</a>
+                    <a href="index.html#faq">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="index.html" class="btn-cta">Back to Home</a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <i class="fas fa-user user-icon" aria-label="User profile"></i>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main id="main-content" class="hidden-element visible-element" style="padding-top: 120px;">
-        <section class="features-carousel">
+    <main id="main-content" class="legal-page">
+        <section class="legal-hero">
             <div class="container">
-                <h3>About AI-CORE</h3>
-                <p class="features-subtitle">A minimalist SaaS landing page built with modern best practices.</p>
-                <div class="card" style="margin: 0 auto; max-width: 800px;">
-                    <p>AI-CORE is a clean, responsive landing page template featuring glassmorphism, smooth animations, and conversion-focused UI. Customize colors, content, and sections to match your brand.</p>
+                <div class="legal-hero-content">
+                    <i class="fas fa-info-circle legal-icon"></i>
+                    <h1>About AI-CORE</h1>
+                    <p class="last-updated">Modern SaaS Landing Page Template</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="legal-content">
+            <div class="container">
+                <div class="legal-card">
+                    
+                    <div class="legal-notice">
+                        <i class="fas fa-rocket"></i>
+                        <p><strong>AI-CORE</strong> is a premium landing page template designed for SaaS products, AI tools, and tech startups. Built with modern web standards and conversion optimization in mind.</p>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-palette"></i> Design Philosophy</h2>
+                        <p>Our design combines minimalism with futuristic aesthetics, featuring:</p>
+                        <ul>
+                            <li><strong>Glassmorphism Effects:</strong> Frosted glass cards with backdrop blur for a modern, layered look</li>
+                            <li><strong>Neon Accents:</strong> Subtle cyan glows and borders that create visual hierarchy</li>
+                            <li><strong>Smooth Animations:</strong> Carefully crafted transitions and progressive loading effects</li>
+                            <li><strong>Dark & Light Modes:</strong> Full theme support with seamless switching</li>
+                            <li><strong>Mobile-First:</strong> Responsive design that works beautifully on all devices</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-code"></i> Technical Features</h2>
+                        <p>Built with cutting-edge web technologies and best practices:</p>
+                        <ul>
+                            <li><strong>Vanilla JavaScript:</strong> No framework dependencies, lightweight and fast</li>
+                            <li><strong>CSS Custom Properties:</strong> Easy theming and customization</li>
+                            <li><strong>Accessibility (A11y):</strong> ARIA labels, keyboard navigation, screen reader support</li>
+                            <li><strong>Performance Optimized:</strong> Minimal dependencies, optimized animations</li>
+                            <li><strong>SEO Ready:</strong> Semantic HTML, meta tags, and structured content</li>
+                            <li><strong>Cross-Browser:</strong> Tested on Chrome, Firefox, Safari, and Edge</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-puzzle-piece"></i> Key Components</h2>
+                        <div class="features-grid">
+                            <div class="feature-highlight">
+                                <i class="fas fa-th-large"></i>
+                                <h3>Hero Section</h3>
+                                <p>Eye-catching glass card with typing effect and email capture form</p>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-images"></i>
+                                <h3>Features Carousel</h3>
+                                <p>Dynamic carousel with keyboard navigation and responsive design</p>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-star"></i>
+                                <h3>Testimonials</h3>
+                                <p>Social proof section with glassmorphism cards and hover effects</p>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-tags"></i>
+                                <h3>Pricing Tables</h3>
+                                <p>Flexible pricing cards with monthly/annual toggle</p>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-question-circle"></i>
+                                <h3>FAQ Accordion</h3>
+                                <p>Expandable FAQ section with smooth animations</p>
+                            </div>
+                            <div class="feature-highlight">
+                                <i class="fas fa-bell"></i>
+                                <h3>Toast Notifications</h3>
+                                <p>Modern notification system with 4 types (success, error, warning, info)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-wrench"></i> Customization</h2>
+                        <p>AI-CORE is designed to be easily customizable:</p>
+                        <ul>
+                            <li><strong>CSS Variables:</strong> Change colors, spacing, and effects in one place</li>
+                            <li><strong>Modular Sections:</strong> Add, remove, or reorder sections as needed</li>
+                            <li><strong>Content Blocks:</strong> Replace demo content with your own text and images</li>
+                            <li><strong>Style Guide:</strong> Comprehensive documentation of design tokens</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-chart-line"></i> Conversion Focused</h2>
+                        <p>Every element is designed to drive conversions:</p>
+                        <ul>
+                            <li>Clear call-to-action buttons with visual hierarchy</li>
+                            <li>Email capture form in hero section for lead generation</li>
+                            <li>Social proof through testimonials and ratings</li>
+                            <li>Transparent pricing with feature comparisons</li>
+                            <li>FAQ section to address common objections</li>
+                            <li>Loading states and feedback for better UX</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-file-alt"></i> Package Includes</h2>
+                        <p>Your purchase includes:</p>
+                        <ul>
+                            <li>All HTML pages (index, about, contact, privacy, terms, 404, docs)</li>
+                            <li>Complete CSS with dark/light mode support</li>
+                            <li>JavaScript for all interactive features</li>
+                            <li>Comprehensive documentation (INSTALLATION.md, README.md, STYLE-GUIDE.md)</li>
+                            <li>Free updates and bug fixes</li>
+                            <li>Email support for customization questions</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-section">
+                        <h2><i class="fas fa-life-ring"></i> Support</h2>
+                        <p>We're here to help you succeed:</p>
+                        <ul>
+                            <li><strong>Documentation:</strong> Detailed guides for installation and customization</li>
+                            <li><strong>Email Support:</strong> Get help with technical questions</li>
+                            <li><strong>Updates:</strong> Regular improvements and new features</li>
+                            <li><strong>Community:</strong> Join our community of users and share tips</li>
+                        </ul>
+                        <div class="cta-buttons" style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="contact.html" class="btn-primary">
+                                <i class="fas fa-envelope"></i> Contact Support
+                            </a>
+                            <a href="docs.html" class="btn-cta">
+                                <i class="fas fa-book"></i> View Documentation
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -37,11 +198,21 @@
         <div class="container">
             <p>&copy; 2025 AI-CORE. All Rights Reserved.</p>
             <div class="footer-links">
-                <a href="index.html#">Privacy Policy</a>
-                <a href="index.html#">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" role="status" aria-live="polite"></div>
 
     <script src="assets/main.js"></script>
 </body>

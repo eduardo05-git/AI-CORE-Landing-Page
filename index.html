@@ -78,13 +78,30 @@
     <header class="header hidden-element">
         <div class="container">
             <h1 class="logo">AI-CORE</h1>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- Navigation -->
             <nav class="nav">
-                <a href="about.html" aria-label="About Our Company">About Us</a>
-                <a href="#features" aria-label="Our Features">Features</a>
-                <a href="#pricing" aria-label="Our Pricing Plans">Pricing</a>
-                <a href="contact.html" aria-label="Contact Us">Contact Us</a>
-                <a href="#" class="btn-cta">Start Free Trial</a>
-                <a href="#" class="user-icon" aria-label="User Account"><i class="fa-regular fa-user"></i></a>
+                <div class="nav-links">
+                    <a href="about.html" aria-label="About Our Company">About Us</a>
+                    <a href="#features" aria-label="Our Features">Features</a>
+                    <a href="#pricing" aria-label="Our Pricing Plans">Pricing</a>
+                    <a href="#faq" aria-label="Frequently Asked Questions">FAQ</a>
+                    <a href="contact.html" aria-label="Contact Us">Contact Us</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="#" class="btn-cta">Start Free Trial</a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="#" class="user-icon" aria-label="User Account"><i class="fa-regular fa-user"></i></a>
+                </div>
             </nav>
         </div>
     </header>
@@ -590,6 +607,109 @@
                 </div>
             </div>
         </section>
+
+        <!-- ========================================================================= -->
+        <!-- FAQ: Frequently Asked Questions (Accordion Style) -->
+        <!-- ========================================================================= -->
+        <section id="faq" class="faq hidden-element">
+            <div class="container">
+                <div class="section-header">
+                    <h3>Frequently Asked Questions</h3>
+                    <p class="section-subtitle">Everything you need to know about AI-CORE</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                            <span class="question-text">How do I get started?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
+                            <div class="answer-content">
+                                <p>Getting started is easy! Just sign up for the plan that fits your needs, and you'll get instant access to our dashboard. Our onboarding wizard will guide you through the initial setup, and our 24/7 support team is always available to help.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                            <span class="question-text">What is included in the free trial?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-2" role="region">
+                            <div class="answer-content">
+                                <p>The free trial includes full access to all Pro Plan features for 14 days. You can explore unlimited data queries, advanced reporting, priority support, and multi-user access. No credit card required to start your trial.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                            <span class="question-text">How do I cancel my subscription?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-3" role="region">
+                            <div class="answer-content">
+                                <p>You can cancel your subscription anytime from your account settings. Simply go to Billing > Manage Subscription > Cancel. Your access will continue until the end of your current billing period, and you won't be charged again.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                            <span class="question-text">Do I need technical knowledge to use AI-CORE?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-4" role="region">
+                            <div class="answer-content">
+                                <p>Not at all! AI-CORE is designed with an intuitive interface that anyone can use. However, we also provide advanced features and APIs for developers and data scientists who want deeper customization and integration.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                            <span class="question-text">How do I transfer my membership to a different account?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-5" role="region">
+                            <div class="answer-content">
+                                <p>To transfer your membership, please contact our support team at support@ai-core.com with both account details. Our team will securely process the transfer within 24 hours while maintaining all your data and settings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
+                            <span class="question-text">What is the refund policy?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-6" role="region">
+                            <div class="answer-content">
+                                <p>We offer a 30-day money-back guarantee for all new subscriptions. If you're not satisfied with AI-CORE for any reason, contact our support team within 30 days of your purchase for a full refund, no questions asked.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-cta">
+                    <p>Still have questions?</p>
+                    <a href="contact.html" class="btn-primary">Contact Support</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- ========================================================================= -->
@@ -604,6 +724,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Script Principal - Contém Progressive Loading, Typing Effect e Pricing Switch (main.js) -->
     <script src="assets/main.js"></script>

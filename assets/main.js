@@ -518,6 +518,209 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
     
+    // --- 7. FUNÇÃO: FAQ ACCORDION (Toggle Expand/Collapse) ---
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach((question) => {
+        question.addEventListener('click', () => {
+            const faqItem = question.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+
+            // Fecha todos os outros itens (opcional: comente para permitir múltiplos abertos)
+            document.querySelectorAll('.faq-item').forEach((item) => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Toggle do item clicado
+            if (isActive) {
+                faqItem.classList.remove('active');
+                question.setAttribute('aria-expanded', 'false');
+            } else {
+                faqItem.classList.add('active');
+                question.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // Suporte a teclado (Enter e Space)
+        question.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                question.click();
+            }
+        });
+    });
+
+    // --- 8. FUNÇÃO: DARK/LIGHT MODE TOGGLE ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    
+    // Verifica se há preferência salva
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Atualiza o ícone
+            const isLight = body.classList.contains('light-mode');
+            themeToggle.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            
+            // Salva preferência
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Toast de confirmação
+            showToast('Theme Updated', `Switched to ${isLight ? 'light' : 'dark'} mode`, 'success');
+        });
+    }
+
+    // --- 8.5. FUNÇÃO: MOBILE MENU TOGGLE ---
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.nav');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    if (mobileMenuToggle && nav) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle menu
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('active');
+            
+            // Previne scroll do body quando menu aberto
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Fecha menu ao clicar em um link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Fecha menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (nav.classList.contains('active') && 
+                !nav.contains(e.target) && 
+                !mobileMenuToggle.contains(e.target)) {
+                nav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fecha menu ao pressionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                mobileMenuToggle.focus();
+            }
+        });
+    }
+
+    // --- 9. FUNÇÃO: BACK TO TOP BUTTON ---
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    if (backToTopBtn) {
+        // Mostra/esconde botão baseado no scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll suave ao topo
+        backToTopBtn.addEventListener('click', () => {
+            const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({
+                top: 0,
+                behavior: prefersReduced ? 'auto' : 'smooth'
+            });
+        });
+    }
+
+    // --- 10. FUNÇÃO: TOAST NOTIFICATIONS ---
+    window.showToast = function(title, message, type = 'info', duration = 4000) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-times-circle',
+            warning: 'fa-exclamation-triangle',
+            info: 'fa-info-circle'
+        };
+
+        toast.innerHTML = `
+            <div class="toast-icon">
+                <i class="fas ${icons[type] || icons.info}"></i>
+            </div>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <button class="toast-close" aria-label="Close notification">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        container.appendChild(toast);
+
+        // Botão de fechar
+        const closeBtn = toast.querySelector('.toast-close');
+        closeBtn.addEventListener('click', () => removeToast(toast));
+
+        // Auto-remove após duração
+        setTimeout(() => removeToast(toast), duration);
+    };
+
+    function removeToast(toast) {
+        toast.classList.add('hiding');
+        setTimeout(() => {
+            if (toast.parentElement) {
+                toast.parentElement.removeChild(toast);
+            }
+        }, 300);
+    }
+
+    // --- 11. FUNÇÃO: LOADING STATES NOS BOTÕES ---
+    // Adiciona loading state aos botões de CTA
+    document.querySelectorAll('.btn-cta, .btn-primary').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Apenas para demonstração - não bloqueia navegação
+            if (this.href === '#' || this.type === 'submit') {
+                e.preventDefault();
+                
+                // Adiciona loading state
+                this.classList.add('btn-loading');
+                const originalText = this.textContent;
+                this.textContent = '';
+                
+                // Simula processo (remover em produção)
+                setTimeout(() => {
+                    this.classList.remove('btn-loading');
+                    this.textContent = originalText;
+                    showToast('Success', 'Action completed successfully!', 'success');
+                }, 2000);
+            }
+        });
+    });
+
 }); // Fim do DOMContentLoaded
 
 
